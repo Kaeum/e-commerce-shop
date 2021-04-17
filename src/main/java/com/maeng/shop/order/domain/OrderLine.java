@@ -20,4 +20,20 @@ public class OrderLine extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
 }

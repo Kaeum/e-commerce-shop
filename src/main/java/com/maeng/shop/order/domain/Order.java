@@ -25,5 +25,19 @@ public class Order extends BaseEntity {
     @OneToMany(mappedBy = "order")
     private List<OrderLine> orderLines = new ArrayList<>();
 
+    public Long getId() {
+        return id;
+    }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public OrderState getOrderState() {
+        return orderState;
+    }
+
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
+    }
 }
