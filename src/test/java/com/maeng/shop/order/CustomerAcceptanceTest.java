@@ -18,8 +18,6 @@ public class CustomerAcceptanceTest extends AcceptanceTest {
     @BeforeEach
     public void setUp() {
         super.setUp();
-
-
     }
 
     @Test
