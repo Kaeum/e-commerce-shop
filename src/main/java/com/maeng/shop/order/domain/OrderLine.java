@@ -5,11 +5,10 @@ import com.maeng.shop.common.BaseEntity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "order_line")
+@Table(name = "order_lines")
 public class OrderLine extends BaseEntity {
     @Id
-    @GeneratedValue
-    @Column(name = "order_line_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

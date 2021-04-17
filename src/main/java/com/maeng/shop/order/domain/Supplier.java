@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "supplier")
+@Table(name = "suppliers")
 public class Supplier extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "supplier_id")
     private Long id;
 
-    @OneToMany
+    @OneToMany(mappedBy = "supplier")
     private List<Item> items = new ArrayList<>();
 }

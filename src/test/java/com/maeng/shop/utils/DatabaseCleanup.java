@@ -1,4 +1,4 @@
-package utils;
+package com.maeng.shop.utils;
 
 import com.google.common.base.CaseFormat;
 import org.springframework.beans.factory.InitializingBean;
@@ -25,6 +25,7 @@ public class DatabaseCleanup implements InitializingBean {
         tableNames = entityManager.getMetamodel().getEntities().stream()
                 .filter(e -> e.getJavaType().getAnnotation(Entity.class) != null)
                 .map(e -> CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, e.getName()))
+                .map(s -> s.concat("s"))
                 .collect(Collectors.toList());
     }
 

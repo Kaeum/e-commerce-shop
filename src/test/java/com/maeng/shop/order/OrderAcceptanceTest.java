@@ -1,12 +1,18 @@
 package com.maeng.shop.order;
 
+import com.maeng.shop.AcceptanceTest;
+import com.maeng.shop.order.dto.OrderDto;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
-public class OrderAcceptanceTest {
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class OrderAcceptanceTest extends AcceptanceTest {
 
     @Test
     void getOrders() {
@@ -19,6 +25,7 @@ public class OrderAcceptanceTest {
                 .then()
                     .log().all()
                 .extract();
+
     }
 
     @Test
