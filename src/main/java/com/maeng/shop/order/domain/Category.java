@@ -1,4 +1,4 @@
-package com.maeng.shop.order;
+package com.maeng.shop.order.domain;
 
 public enum Category {
     CLOTHES,

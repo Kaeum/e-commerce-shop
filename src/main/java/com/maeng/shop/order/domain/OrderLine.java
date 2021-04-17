@@ -1,4 +1,4 @@
-package com.maeng.shop.order;
+package com.maeng.shop.order.domain;
 
 import com.maeng.shop.common.BaseEntity;
 

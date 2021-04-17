@@ -1,7 +1,7 @@
 package com.maeng.shop.customer;
 
 import com.maeng.shop.common.BaseEntity;
-import com.maeng.shop.order.Order;
+import com.maeng.shop.order.domain.Order;
 
 import javax.persistence.*;
 import java.util.List;
