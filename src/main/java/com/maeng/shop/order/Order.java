@@ -1,5 +1,6 @@
 package com.maeng.shop.order;
 
+import com.maeng.shop.common.BaseEntity;
 import com.maeng.shop.customer.Customer;
 
 import javax.persistence.*;
@@ -8,10 +9,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long id;
 
