@@ -16,8 +16,9 @@ public class CustomerService {
     }
 
     @Transactional
-    public void signUp(final SignupRequest signupRequest) {
+    public Long signUp(final SignupRequest signupRequest) {
         Customer customer = new Customer(signupRequest);
         customerRepository.save(customer);
+        return customer.getId();
     }
 }

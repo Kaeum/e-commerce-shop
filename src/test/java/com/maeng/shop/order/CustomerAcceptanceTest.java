@@ -28,25 +28,11 @@ public class CustomerAcceptanceTest extends AcceptanceTest {
     void createCustomer() {
         String email = "newmember1@email.com";
         String password = "no_one_knows123";
-        int age = 20;
+        String age = "20";
         String name = "김철수";
-        Map<String, String> body = new HashMap<>();
-        body.put("email", email);
-        body.put("password", password);
-        body.put("age", age + "");
-        body.put("name", name);
 
-        ExtractableResponse<Response> response = RestAssured
-                .given()
-                    .log().all()
-                    .body(body)
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                    .post("/api/v1/customers")
-                .then()
-                    .log().all()
-                .extract();
-
+        ExtractableResponse<Response> response = CustomerFixtures.회원가입(email, password, age, name);
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+        assertThat(response.header("Location")).isNotBlank();
     }
 }

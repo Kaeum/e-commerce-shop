@@ -43,4 +43,8 @@ public class Customer extends BaseEntity {
                     ,signupRequest.getAge()
                     ,signupRequest.getName());
     }
+
+    public Long getId() {
+        return id;
+    }
 }

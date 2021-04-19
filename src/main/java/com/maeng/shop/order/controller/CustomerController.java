@@ -3,11 +3,13 @@ package com.maeng.shop.order.controller;
 import com.maeng.shop.order.application.CustomerService;
 import com.maeng.shop.order.application.OrderService;
 import com.maeng.shop.order.dto.OrderDto;
+import com.maeng.shop.order.dto.PlaceOrderRequest;
 import com.maeng.shop.order.dto.SignupRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -22,13 +24,24 @@ public class CustomerController {
     }
 
     @PostMapping(path = "/api/v1/customers")
-    public ResponseEntity<Void> signUp(@RequestBody final SignupRequest signupRequest) {
-        customerService.signUp(signupRequest);
-        return ResponseEntity.status(HttpStatus.CREATED.value()).build();
+    public ResponseEntity<Long> signUp(@RequestBody final SignupRequest signupRequest) {
+        Long customerId = customerService.signUp(signupRequest);
+        return ResponseEntity
+                .created(URI.create("/api/v1/customers/" + customerId))
+                .body(customerId);
     }
 
+    /*@PostMapping(path = "/api/v1/customers/{customerId}/orders")
+    public ResponseEntity<Void> placeOrder(
+            @PathVariable final Long customerId,
+            @RequestBody final PlaceOrderRequest placeOrderRequest)
+    {
+        Long orderId = orderService.placeOrder(placeOrderRequest);
+        return ResponseEntity.created(URI.create("/api/v1/customers/"+customerId+"/orders/" + orderId)).build();
+    }*/
+
     @GetMapping(path = "customers/{customerId}/orders")
-    public List<OrderDto> getOrders(@PathVariable Long customerId) {
+    public List<OrderDto> getOrders(@PathVariable final Long customerId) {
         return orderService.getOrders();
     }
 }

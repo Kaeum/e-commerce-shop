@@ -15,6 +15,9 @@ public class Item extends BaseEntity {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Supplier supplier;
 }

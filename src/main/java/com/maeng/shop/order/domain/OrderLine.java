@@ -14,9 +14,6 @@ public class OrderLine extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Item item;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
 
@@ -26,10 +23,6 @@ public class OrderLine extends BaseEntity {
 
     public Item getItem() {
         return item;
-    }
-
-    public Category getCategory() {
-        return category;
     }
 
     public Order getOrder() {

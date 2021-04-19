@@ -2,7 +2,6 @@ package com.maeng.shop.order.dto;
 
 import com.maeng.shop.customer.Customer;
 import com.maeng.shop.order.domain.Order;
-import com.maeng.shop.order.domain.OrderLine;
 import com.maeng.shop.order.domain.OrderState;
 
 import java.util.ArrayList;

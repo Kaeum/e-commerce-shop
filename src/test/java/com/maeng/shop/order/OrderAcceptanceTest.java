@@ -1,18 +1,24 @@
 package com.maeng.shop.order;
 
 import com.maeng.shop.AcceptanceTest;
-import com.maeng.shop.order.dto.OrderDto;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class OrderAcceptanceTest extends AcceptanceTest {
+
+    @BeforeEach
+    public void setUp() {
+        super.setUp();
+        String email = "newmember1@email.com";
+        String password = "no_one_knows123";
+        String age = "20";
+        String name = "김철수";
+        CustomerFixtures.회원가입(email, password, age, name);
+    }
 
     @Test
     void getOrders() {
@@ -25,7 +31,6 @@ public class OrderAcceptanceTest extends AcceptanceTest {
                 .then()
                     .log().all()
                 .extract();
-
     }
 
     @Test
