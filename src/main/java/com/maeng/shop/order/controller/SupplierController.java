@@ -3,6 +3,7 @@ package com.maeng.shop.order.controller;
 import com.maeng.shop.order.application.SupplierService;
 import com.maeng.shop.order.dto.RegisterSupplierRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ public class SupplierController {
         this.supplierService = supplierService;
     }
 
+    @PostMapping(path = "/api/v1/suppliers")
     public ResponseEntity<Long> registerSupplier(@RequestBody final RegisterSupplierRequest registerSupplierRequest) {
         Long supplierId = supplierService.registerSupplier(registerSupplierRequest);
         return ResponseEntity.created(URI.create("/api/v1/suppliers" + supplierId))
