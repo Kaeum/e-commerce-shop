@@ -1,4 +1,4 @@
-package com.maeng.shop.order;
+package com.maeng.shop.order.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
 import io.restassured.RestAssured;

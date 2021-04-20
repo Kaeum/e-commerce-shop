@@ -1,4 +1,4 @@
-package com.maeng.shop.order;
+package com.maeng.shop.order.acceptance;
 
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;

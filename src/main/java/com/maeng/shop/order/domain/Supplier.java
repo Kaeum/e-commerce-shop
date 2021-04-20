@@ -4,8 +4,6 @@ import com.maeng.shop.common.BaseEntity;
 import com.maeng.shop.order.dto.RegisterSupplierRequest;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "suppliers")
@@ -17,8 +15,8 @@ public class Supplier extends BaseEntity {
 
     private String companyName;
 
-    @OneToMany(mappedBy = "supplier")
-    private List<Item> items = new ArrayList<>();
+    @Embedded
+    private Items items = new Items();
 
     public Supplier() {}
 
@@ -32,5 +30,17 @@ public class Supplier extends BaseEntity {
 
     public Long getId() {
         return id;
+    }
+
+    public void addItem(Item item) {
+        items.addItem(item);
+    }
+
+    public void addItem(String name, int unitPrice, Sex sex, Category category) {
+        items.addItem(new Item(name, unitPrice, sex, category, this));
+    }
+
+    public boolean isSelling(Item item) {
+        return items.contains(item);
     }
 }

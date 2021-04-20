@@ -11,13 +11,30 @@ public class Item extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     private int unitPrice;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private Sex sex;
 
     @Enumerated(EnumType.STRING)
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Supplier supplier;
+
+    public Item() {}
+
+    public Item(String name, int unitPrice, Sex sex, Category category, Supplier supplier) {
+        this.name = name;
+        this.unitPrice = unitPrice;
+        this.sex = sex;
+        this.category = category;
+        this.supplier = supplier;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
