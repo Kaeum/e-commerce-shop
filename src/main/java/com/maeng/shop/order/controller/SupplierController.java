@@ -22,7 +22,7 @@ public class SupplierController {
     @PostMapping(path = "/api/v1/suppliers")
     public ResponseEntity<Long> registerSupplier(@RequestBody final RegisterSupplierRequest registerSupplierRequest) {
         Long supplierId = supplierService.registerSupplier(registerSupplierRequest);
-        return ResponseEntity.created(URI.create("/api/v1/suppliers" + supplierId))
+        return ResponseEntity.created(URI.create("/api/v1/suppliers/" + supplierId))
                 .body(supplierId);
     }
 

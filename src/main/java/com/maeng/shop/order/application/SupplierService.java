@@ -35,7 +35,6 @@ public class SupplierService {
 
         supplier.addItem(item);
 
-        supplierRepository.flush();
         return item.getId();
     }
 }
