@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.maeng.shop.order.acceptance.SupplierFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SupplierAcceptanceTest extends AcceptanceTest {
@@ -22,20 +23,11 @@ public class SupplierAcceptanceTest extends AcceptanceTest {
     @DisplayName("Scenario: 새로운 거래처를 등록한다.")
     void registerSupplierTest() {
         // given
-        Map<String, String> body = new HashMap<>();
-        body.put("companyName", "Nike");
+        Map<String, String> supplier = new HashMap<>();
+        supplier.put("companyName", "Nike");
 
         // when
-        ExtractableResponse<Response> response = RestAssured
-                .given()
-                    .log().all()
-                    .body(body)
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                    .post("/api/v1/suppliers")
-                .then()
-                    .log().all()
-                .extract();
+        ExtractableResponse<Response> response = 새로운_거래처_등록(supplier);
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
@@ -49,46 +41,18 @@ public class SupplierAcceptanceTest extends AcceptanceTest {
         Map<String, String> supplier = new HashMap<>();
         supplier.put("companyName", "Nike");
 
-        Long supplierId = RestAssured
-                .given()
-                    .log().all()
-                    .body(supplier)
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                    .post("/api/v1/suppliers")
-                .then()
-                    .log().all()
-                    .extract()
-                .as(Long.class);
-
         Map<String, String> item = new HashMap<>();
         item.put("name", "Nike Air Force 1 '07");
         item.put("unitPrice", "130000");
         item.put("sex", "MAN");
         item.put("category", "SHOES");
 
+        Long supplierId = 새로운_거래처_등록(supplier).as(Long.class);
+
         // when
-        ExtractableResponse<Response> response = RestAssured
-                .given()
-                    .log().all()
-                    .body(item)
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                    .post("/api/v1/suppliers/"+supplierId+"/items")
-                .then()
-                    .log().all()
-                .extract();
+        ExtractableResponse<Response> response = 새로운_아이템_등록(supplierId, item);
 
         // then
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
-        ExtractableResponse<Response> getResponse = RestAssured
-                .given()
-                    .log().all()
-                .when()
-                    .get("/api/v1/suppliers/" + supplierId)
-                .then()
-                .log().all().extract();
-        assertThat(getResponse.as(SupplierDto.class).getItems().stream().map(itemDto -> itemDto.getName())).contains(item.get("name"));
-
+        아이템_등록_확인(response, item, supplierId);
     }
 }
