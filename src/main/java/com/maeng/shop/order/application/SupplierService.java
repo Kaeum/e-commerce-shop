@@ -5,6 +5,7 @@ import com.maeng.shop.order.domain.Supplier;
 import com.maeng.shop.order.domain.SupplierRepository;
 import com.maeng.shop.order.dto.RegisterItemRequest;
 import com.maeng.shop.order.dto.RegisterSupplierRequest;
+import com.maeng.shop.order.dto.SupplierDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,5 +35,10 @@ public class SupplierService {
                 supplier);
 
         supplier.addItem(item);
+    }
+
+    public SupplierDto getSupplier(Long supplierId) {
+        Supplier supplier = supplierRepository.findById(supplierId).orElseThrow(RuntimeException::new);
+        return supplier.toDto();
     }
 }

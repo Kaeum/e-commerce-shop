@@ -3,13 +3,12 @@ package com.maeng.shop.order.controller;
 import com.maeng.shop.order.application.SupplierService;
 import com.maeng.shop.order.dto.RegisterItemRequest;
 import com.maeng.shop.order.dto.RegisterSupplierRequest;
+import com.maeng.shop.order.dto.SupplierDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.function.Supplier;
 
 @RestController
 public class SupplierController {
@@ -17,6 +16,12 @@ public class SupplierController {
 
     public SupplierController(SupplierService supplierService) {
         this.supplierService = supplierService;
+    }
+
+    @GetMapping(path = "/api/v1/suppliers/{supplierId}")
+    public ResponseEntity<SupplierDto> getSupplier(@PathVariable final Long supplierId) {
+        SupplierDto supplier = supplierService.getSupplier(supplierId);
+        return ResponseEntity.ok(supplier);
     }
 
     @PostMapping(path = "/api/v1/suppliers")

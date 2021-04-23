@@ -2,6 +2,7 @@ package com.maeng.shop.order.domain;
 
 import com.maeng.shop.common.BaseEntity;
 import com.maeng.shop.order.dto.RegisterSupplierRequest;
+import com.maeng.shop.order.dto.SupplierDto;
 
 import javax.persistence.*;
 
@@ -38,5 +39,9 @@ public class Supplier extends BaseEntity {
 
     public boolean isSelling(Item item) {
         return items.contains(item);
+    }
+
+    public SupplierDto toDto() {
+        return new SupplierDto(id, companyName, items.toItemsDto());
     }
 }

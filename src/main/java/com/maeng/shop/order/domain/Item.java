@@ -1,6 +1,7 @@
 package com.maeng.shop.order.domain;
 
 import com.maeng.shop.common.BaseEntity;
+import com.maeng.shop.order.dto.ItemDto;
 
 import javax.persistence.*;
 
@@ -36,5 +37,9 @@ public class Item extends BaseEntity {
 
     public Long getId() {
         return id;
+    }
+
+    public ItemDto toItemDto() {
+        return new ItemDto(id, name, unitPrice, sex, category);
     }
 }
