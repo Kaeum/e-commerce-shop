@@ -36,10 +36,6 @@ public class Supplier extends BaseEntity {
         items.addItem(item);
     }
 
-    public void addItem(String name, int unitPrice, Sex sex, Category category) {
-        items.addItem(new Item(name, unitPrice, sex, category, this));
-    }
-
     public boolean isSelling(Item item) {
         return items.contains(item);
     }

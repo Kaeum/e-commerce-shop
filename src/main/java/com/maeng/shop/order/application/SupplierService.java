@@ -25,7 +25,7 @@ public class SupplierService {
     }
 
     @Transactional
-    public Long registerItem(final RegisterItemRequest registerItemRequest, final Long supplierId) {
+    public void registerItem(final RegisterItemRequest registerItemRequest, final Long supplierId) {
         Supplier supplier = supplierRepository.findById(supplierId).orElseThrow(RuntimeException::new);
         Item item = new Item(registerItemRequest.getName(),
                 registerItemRequest.getUnitPrice(),
@@ -34,7 +34,5 @@ public class SupplierService {
                 supplier);
 
         supplier.addItem(item);
-
-        return item.getId();
     }
 }

@@ -1,6 +1,8 @@
 package com.maeng.shop.order.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
+import com.maeng.shop.order.domain.Supplier;
+import com.maeng.shop.order.dto.SupplierDto;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -79,5 +81,14 @@ public class SupplierAcceptanceTest extends AcceptanceTest {
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+        ExtractableResponse<Response> getResponse = RestAssured
+                .given()
+                    .log().all()
+                .when()
+                    .get("/api/v1/suppliers/" + supplierId)
+                .then()
+                .log().all().extract();
+        assertThat(getResponse.as(SupplierDto.class).getItems().stream().map(itemDto -> itemDto.getName())).contains(item.get("name"));
+
     }
 }

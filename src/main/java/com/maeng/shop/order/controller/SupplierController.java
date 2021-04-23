@@ -31,8 +31,7 @@ public class SupplierController {
             @PathVariable final Long supplierId,
             @RequestBody final RegisterItemRequest registerItemRequest
     ) {
-        Long itemId = supplierService.registerItem(registerItemRequest, supplierId);
-        return ResponseEntity.created(URI.create("/api/v1/suppliers/"+supplierId+"/items/"+itemId))
-                .body(itemId);
+        supplierService.registerItem(registerItemRequest, supplierId);
+        return ResponseEntity.created(URI.create("/api/v1/suppliers/"+supplierId+"/items/")).build();
     }
 }
