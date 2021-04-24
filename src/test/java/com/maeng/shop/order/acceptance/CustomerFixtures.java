@@ -11,21 +11,21 @@ import java.util.Map;
 public class CustomerFixtures {
     public static ExtractableResponse<Response> 회원가입(String email, String password, String age, String name) {
 
-        Map<String, String> body = new HashMap<>();
-        body.put("email", email);
-        body.put("password", password);
-        body.put("age", age);
-        body.put("name", name);
+        Map<String, String> customer = new HashMap<>();
+        customer.put("email", email);
+        customer.put("password", password);
+        customer.put("age", age);
+        customer.put("name", name);
 
         ExtractableResponse<Response> response = RestAssured
                 .given()
-                .log().all()
-                .body(body)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .log().all()
+                    .body(customer)
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .post("/api/v1/customers")
+                    .post("/api/v1/customers")
                 .then()
-                .log().all()
+                    .log().all()
                 .extract();
         return response;
     }

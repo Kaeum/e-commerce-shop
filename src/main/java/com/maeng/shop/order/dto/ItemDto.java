@@ -41,5 +41,4 @@ public class ItemDto {
     public Category getCategory() {
         return category;
     }
-
 }

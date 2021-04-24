@@ -14,6 +14,8 @@ public class OrderLine extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Item item;
 
+    private String size;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
 
@@ -25,7 +27,12 @@ public class OrderLine extends BaseEntity {
         return item;
     }
 
+    public String getSize() {
+        return size;
+    }
+
     public Order getOrder() {
         return order;
     }
+
 }

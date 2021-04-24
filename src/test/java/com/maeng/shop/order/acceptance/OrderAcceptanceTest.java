@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
 public class OrderAcceptanceTest extends AcceptanceTest {
+    private Long customerId;
 
     @BeforeEach
     public void setUp() {
@@ -17,7 +18,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         String password = "no_one_knows123";
         String age = "20";
         String name = "김철수";
-        CustomerFixtures.회원가입(email, password, age, name);
+        customerId = CustomerFixtures.회원가입(email, password, age, name).as(Long.class);
     }
 
     @Test
@@ -27,7 +28,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
                     .log().all()
                     .accept(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                    .get("/api/v1/customers/1/orders")
+                    .get("/api/v1/customers/"+customerId+"/orders")
                 .then()
                     .log().all()
                 .extract();
@@ -53,7 +54,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
                     .log().all()
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                    .post("/api/v1/customers/1/orders")
+                    .post("/api/v1/customers/"+customerId+"/orders")
                 .then()
                     .log().all()
                 .extract();

@@ -1,6 +1,6 @@
 package com.maeng.shop.order.application;
 
-import com.maeng.shop.customer.Customer;
+import com.maeng.shop.order.domain.Customer;
 import com.maeng.shop.order.domain.CustomerRepository;
 import com.maeng.shop.order.dto.SignupRequest;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerService {
     private final CustomerRepository customerRepository;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(final CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
@@ -20,5 +20,9 @@ public class CustomerService {
         Customer customer = new Customer(signupRequest);
         customerRepository.save(customer);
         return customer.getId();
+    }
+
+    public Customer getCustomer(final Long customerId) {
+        return customerRepository.findById(customerId).orElseThrow(RuntimeException::new);
     }
 }

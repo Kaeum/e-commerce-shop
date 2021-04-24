@@ -1,15 +1,21 @@
 package com.maeng.shop.order.dto;
 
-import com.maeng.shop.customer.Customer;
+import com.maeng.shop.order.domain.Customer;
 import com.maeng.shop.order.domain.Order;
 import com.maeng.shop.order.domain.OrderState;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class OrderDto {
-    private OrderDto() {}
+
+    private Long id;
+
+    private Customer customer;
+
+    private OrderState orderState;
+
+    private List<OrderLineDto> orderLines;
 
     public OrderDto(Long id, Customer customer, OrderState orderState, List<OrderLineDto> orderLines) {
         this.id = id;
@@ -18,13 +24,21 @@ public class OrderDto {
         this.orderLines = orderLines;
     }
 
-    private Long id;
+    public Long getId() {
+        return id;
+    }
 
-    private Customer customer;
+    public Customer getCustomer() {
+        return customer;
+    }
 
-    private OrderState orderState;
+    public OrderState getOrderState() {
+        return orderState;
+    }
 
-    private List<OrderLineDto> orderLines = new ArrayList<>();
+    public List<OrderLineDto> getOrderLines() {
+        return orderLines;
+    }
 
     public static OrderDto toDto(Order order) {
         return new OrderDto(

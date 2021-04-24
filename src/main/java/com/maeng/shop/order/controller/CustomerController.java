@@ -31,16 +31,16 @@ public class CustomerController {
                 .body(customerId);
     }
 
-    /*@PostMapping(path = "/api/v1/customers/{customerId}/orders")
+    @PostMapping(path = "/api/v1/customers/{customerId}/orders")
     public ResponseEntity<Void> placeOrder(
             @PathVariable final Long customerId,
             @RequestBody final PlaceOrderRequest placeOrderRequest)
     {
-        Long orderId = orderService.placeOrder(placeOrderRequest);
-        return ResponseEntity.created(URI.create("/api/v1/customers/"+customerId+"/orders/" + orderId)).build();
-    }*/
+        orderService.placeOrder(customerId, placeOrderRequest);
+        return ResponseEntity.created(URI.create("/api/v1/customers/"+customerId+"/orders/")).build();
+    }
 
-    @GetMapping(path = "customers/{customerId}/orders")
+    @GetMapping(path = "/api/v1/customers/{customerId}/orders")
     public List<OrderDto> getOrders(@PathVariable final Long customerId) {
         return orderService.getOrders();
     }
