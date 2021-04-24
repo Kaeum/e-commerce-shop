@@ -8,15 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceOrderRequest {
-    private Customer customerId;
-
-    private OrderState orderState;
-
     private List<OrderLineRequest> orderLines;
 
-    public PlaceOrderRequest(Customer customerId, OrderState orderState, List<OrderLineRequest> orderLines) {
-        this.customerId = customerId;
-        this.orderState = orderState;
+    public PlaceOrderRequest(Customer customerId, List<OrderLineRequest> orderLines) {
         this.orderLines = orderLines;
+    }
+
+    public List<OrderLineRequest> getOrderLines() {
+        return orderLines;
     }
 }
