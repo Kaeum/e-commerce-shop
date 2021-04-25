@@ -23,12 +23,10 @@ public class Customer extends BaseEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
     private List<Order> orders;
 
-    public Customer() {
-
-    }
+    public Customer() {}
 
     public Customer(String email, String password, int age, String name) {
         this.email = email;
@@ -46,5 +44,13 @@ public class Customer extends BaseEntity {
 
     public Long getId() {
         return id;
+    }
+
+    public void placeOrder(List<OrderLine> orderLines) {
+        Order order = new Order(this, OrderState.NEW, orderLines);
+        for(int i = 0; i < orderLines.size(); i++) {
+            orderLines.get(i).setOrder(order);
+        }
+        orders.add(order);
     }
 }

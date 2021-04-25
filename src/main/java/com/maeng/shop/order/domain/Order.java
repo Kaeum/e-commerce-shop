@@ -21,10 +21,16 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderState orderState;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private List<OrderLine> orderLines = new ArrayList<>();
 
     public Order() {}
+
+    public Order(Customer customer, OrderState orderState, List<OrderLine> orderLines) {
+        this.customer = customer;
+        this.orderState = orderState;
+        this.orderLines = orderLines;
+    }
 
     public Long getId() {
         return id;
