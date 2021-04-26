@@ -4,3 +4,7 @@
 * 인터넷 쇼핑몰을 만든다고 가정한다.
 * ATDD, TDD를 연습한다.
 * Clean Code, Clean Architecture를 지향한다.
+
+### TODO List
+* 양방향 연관관계 제거
+* 패키지 순환참조 제거
