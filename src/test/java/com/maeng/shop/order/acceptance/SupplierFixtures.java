@@ -1,5 +1,6 @@
 package com.maeng.shop.order.acceptance;
 
+import com.maeng.shop.order.dto.ItemDto;
 import com.maeng.shop.order.dto.SupplierDto;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
@@ -19,42 +20,42 @@ public class SupplierFixtures {
     public static ExtractableResponse<Response> 새로운_거래처_등록(Map<String, String> supplier) {
         return RestAssured
                 .given()
-                .log().all()
-                .body(supplier)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .log().all()
+                    .body(supplier)
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .post("/api/v1/suppliers")
+                    .post("/api/v1/suppliers")
                 .then()
-                .log().all()
+                    .log().all()
                 .extract();
     }
 
     public static ExtractableResponse<Response> 새로운_아이템_등록(Long supplierId, Map<String, String> item) {
         return RestAssured
                 .given()
-                .log().all()
-                .body(item)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .log().all()
+                    .body(item)
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .post("/api/v1/suppliers/"+supplierId+"/items")
+                    .post("/api/v1/suppliers/"+supplierId+"/items")
                 .then()
-                .log().all()
+                    .log().all()
                 .extract();
     }
 
     public static void 아이템_등록_확인(ExtractableResponse<Response> response, Map<String, String> item, Long supplierId) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+
         ExtractableResponse<Response> getResponse = RestAssured
                 .given()
-                .log().all()
+                    .log().all()
                 .when()
-                .get("/api/v1/suppliers/" + supplierId)
+                    .get("/api/v1/suppliers/" + supplierId + "/items")
                 .then()
-                .log().all().extract();
+                    .log().all()
+                .extract();
 
-        List<String> itemNames = getResponse.as(SupplierDto.class).getItems().stream()
-                .map(itemDto -> itemDto.getName())
-                .collect(Collectors.toList());
-        assertThat(itemNames).contains(item.get("name"));
+        assertThat(getResponse.body().jsonPath().getString("[0].name")).isEqualTo("Nike Air Force 1 '07");
+
     }
 }

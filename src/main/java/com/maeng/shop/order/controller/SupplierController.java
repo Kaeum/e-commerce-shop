@@ -1,6 +1,7 @@
 package com.maeng.shop.order.controller;
 
 import com.maeng.shop.order.application.SupplierService;
+import com.maeng.shop.order.dto.ItemDto;
 import com.maeng.shop.order.dto.RegisterItemRequest;
 import com.maeng.shop.order.dto.RegisterSupplierRequest;
 import com.maeng.shop.order.dto.SupplierDto;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 import java.util.function.Supplier;
 
 @RestController
@@ -36,7 +38,12 @@ public class SupplierController {
             @PathVariable final Long supplierId,
             @RequestBody final RegisterItemRequest registerItemRequest
     ) {
-        supplierService.registerItem(registerItemRequest, supplierId);
-        return ResponseEntity.created(URI.create("/api/v1/suppliers/"+supplierId+"/items/")).build();
+        Long itemId = supplierService.registerItem(registerItemRequest, supplierId);
+        return ResponseEntity.created(URI.create("/api/v1/suppliers/"+supplierId+"/items/"+itemId)).body(itemId);
+    }
+
+    @GetMapping(path = "/api/v1/suppliers/{supplierId}/items")
+    public ResponseEntity<List<ItemDto>> getItemsBySupplierId(@PathVariable final Long supplierId) {
+        return ResponseEntity.ok(supplierService.getItemsBySupplierId(supplierId));
     }
 }

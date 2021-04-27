@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByIdIn(List<Long> itemIds);
+
+    List<Item> findAllBySupplierId(Long supplierId);
 }
