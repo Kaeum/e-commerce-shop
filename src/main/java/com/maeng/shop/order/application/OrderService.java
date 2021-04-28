@@ -37,7 +37,7 @@ public class OrderService {
     }
 
     @Transactional
-    public void placeOrder(Long customerId, PlaceOrderRequest placeOrderRequest) {
+    public Long placeOrder(Long customerId, PlaceOrderRequest placeOrderRequest) {
         Customer customer = customerService.getCustomer(customerId);
         Order order = Order.createOrder(customer);
 
@@ -58,5 +58,7 @@ public class OrderService {
             String size = sizes.get(i);
             orderLineRepository.save(OrderLine.createOrderLine(item, size, order));
         });
+
+        return order.getId();
     }
 }

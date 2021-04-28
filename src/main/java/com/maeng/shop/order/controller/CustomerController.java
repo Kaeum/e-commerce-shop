@@ -31,12 +31,13 @@ public class CustomerController {
     }
 
     @PostMapping(path = "/api/v1/customers/{customerId}/orders")
-    public ResponseEntity<Void> placeOrder(
+    public ResponseEntity<Long> placeOrder(
             @PathVariable final Long customerId,
             @RequestBody final PlaceOrderRequest placeOrderRequest)
     {
-        orderService.placeOrder(customerId, placeOrderRequest);
-        return ResponseEntity.created(URI.create("/api/v1/customers/"+customerId+"/orders/")).build();
+        Long orderId = orderService.placeOrder(customerId, placeOrderRequest);
+        return ResponseEntity.created(URI.create("/api/v1/customers/"+customerId+"/orders/"+orderId))
+                .body(orderId);
     }
 
     @GetMapping(path = "/api/v1/customers/{customerId}/orders")

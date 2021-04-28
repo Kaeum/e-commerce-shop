@@ -9,9 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.maeng.shop.order.acceptance.SupplierFixtures.요청_아이템_맵_생성;
@@ -21,6 +18,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     private Long customerId;
     private Long itemOneId;
     private Long itemTwoId;
+
     @BeforeEach
     public void setUp() {
         super.setUp();
