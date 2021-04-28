@@ -12,7 +12,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Feature: 고객과 관련된 기능을 담당한다.")
+@DisplayName("Feature: 고객과 관련된 기능을 관리한다.")
 public class CustomerAcceptanceTest extends AcceptanceTest {
 
     @BeforeEach

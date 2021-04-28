@@ -2,19 +2,19 @@ package com.maeng.shop.order.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
 import com.maeng.shop.order.dto.OrderDto;
-import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 
 import java.util.Map;
 
 import static com.maeng.shop.order.acceptance.SupplierFixtures.요청_아이템_맵_생성;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("Feature: 주문과 관련된 기능을 관리한다.")
 public class OrderAcceptanceTest extends AcceptanceTest {
     private Long customerId;
     private Long itemOneId;
@@ -38,6 +38,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
+    @DisplayName("Scenario: 고객은 등록된 품목들을 주문할 수 있다.")
     void placeOrder() {
         // given
         Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");
@@ -53,6 +54,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
+    @DisplayName("Scenario: 고객이 어떤 주문을 했는지 조회할 수 있다.")
     void getOrders() {
         // given
         Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");

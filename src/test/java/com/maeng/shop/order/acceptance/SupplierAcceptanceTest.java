@@ -12,6 +12,7 @@ import java.util.Map;
 import static com.maeng.shop.order.acceptance.SupplierFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("Feature: 거래처와 관련된 기능을 관리한다.")
 public class SupplierAcceptanceTest extends AcceptanceTest {
 
     @Test
