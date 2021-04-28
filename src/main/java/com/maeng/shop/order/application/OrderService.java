@@ -4,6 +4,9 @@ import com.maeng.shop.order.domain.*;
 import com.maeng.shop.order.dto.OrderDto;
 import com.maeng.shop.order.dto.OrderLineRequest;
 import com.maeng.shop.order.dto.PlaceOrderRequest;
+import com.maeng.shop.order.repository.ItemRepository;
+import com.maeng.shop.order.repository.OrderLineRepository;
+import com.maeng.shop.order.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

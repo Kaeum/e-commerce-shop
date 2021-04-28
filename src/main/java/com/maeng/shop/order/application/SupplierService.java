@@ -1,9 +1,9 @@
 package com.maeng.shop.order.application;
 
 import com.maeng.shop.order.domain.Item;
-import com.maeng.shop.order.domain.ItemRepository;
+import com.maeng.shop.order.repository.ItemRepository;
 import com.maeng.shop.order.domain.Supplier;
-import com.maeng.shop.order.domain.SupplierRepository;
+import com.maeng.shop.order.repository.SupplierRepository;
 import com.maeng.shop.order.dto.ItemDto;
 import com.maeng.shop.order.dto.RegisterItemRequest;
 import com.maeng.shop.order.dto.RegisterSupplierRequest;
