@@ -5,7 +5,6 @@ import com.maeng.shop.order.application.OrderService;
 import com.maeng.shop.order.dto.OrderDto;
 import com.maeng.shop.order.dto.PlaceOrderRequest;
 import com.maeng.shop.order.dto.SignupRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

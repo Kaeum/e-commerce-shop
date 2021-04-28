@@ -1,11 +1,8 @@
 package com.maeng.shop.order.domain;
 
 import com.maeng.shop.common.BaseEntity;
-import com.maeng.shop.order.dto.PlaceOrderRequest;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "orders")

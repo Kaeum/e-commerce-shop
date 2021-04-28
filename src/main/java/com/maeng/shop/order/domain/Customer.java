@@ -1,11 +1,9 @@
 package com.maeng.shop.order.domain;
 
 import com.maeng.shop.common.BaseEntity;
-import com.maeng.shop.order.domain.Order;
 import com.maeng.shop.order.dto.SignupRequest;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "customers")

@@ -1,7 +1,5 @@
 package com.maeng.shop.order.dto;
 
-import java.util.List;
-
 public class SupplierDto {
     private Long id;
 

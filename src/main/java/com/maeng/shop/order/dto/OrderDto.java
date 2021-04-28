@@ -1,6 +1,5 @@
 package com.maeng.shop.order.dto;
 
-import com.maeng.shop.order.domain.Customer;
 import com.maeng.shop.order.domain.Order;
 import com.maeng.shop.order.domain.OrderState;
 
