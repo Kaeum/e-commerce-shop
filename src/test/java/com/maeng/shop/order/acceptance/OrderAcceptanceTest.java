@@ -1,6 +1,7 @@
 package com.maeng.shop.order.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
+import com.maeng.shop.order.dto.OrderDto;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -37,36 +38,37 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    void getOrders() {
-        ExtractableResponse<Response> response = RestAssured
-                .given()
-                    .log().all()
-                    .accept(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                    .get("/api/v1/customers/"+customerId+"/orders")
-                .then()
-                    .log().all()
-                .extract();
-    }
-
-    @Test
     void placeOrder() {
+        // given
         Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");
         Map<String, String> orderLineTwo = OrderFixtures.요청_주문품목_맵_생성(itemTwoId, "S");
         Map<String, Object> order = OrderFixtures.요청_주문_맵_생성(orderLineOne, orderLineTwo);
 
-        ExtractableResponse<Response> response = RestAssured
-                .given()
-                    .log().all()
-                    .body(order)
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                    .post("/api/v1/customers/"+customerId+"/orders")
-                .then()
-                    .log().all()
-                .extract();
+        // when
+        ExtractableResponse<Response> response = OrderFixtures.주문하기(customerId, order);
 
+        // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+        assertThat(response.as(Long.class)).isEqualTo(1);
     }
 
+    @Test
+    void getOrders() {
+        // given
+        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");
+        Map<String, Object> orderOne = OrderFixtures.요청_주문_맵_생성(orderLineOne);
+
+        Map<String, String> orderLineTwo = OrderFixtures.요청_주문품목_맵_생성(itemTwoId, "S");
+        Map<String, Object> orderTwo = OrderFixtures.요청_주문_맵_생성(orderLineOne);
+
+        OrderFixtures.주문하기(customerId, orderOne);
+        OrderFixtures.주문하기(customerId, orderTwo);
+
+        // when
+        ExtractableResponse<Response> response = OrderFixtures.주문_목록_조회(customerId);
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.body().jsonPath().getList(".", OrderDto.class).size()).isEqualTo(2);
+    }
 }
