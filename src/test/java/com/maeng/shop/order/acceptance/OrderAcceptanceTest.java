@@ -27,6 +27,26 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         String age = "20";
         String name = "김철수";
         customerId = CustomerFixtures.회원가입(email, password, age, name).as(Long.class);
+
+        Map<String, String> supplier = new HashMap<>();
+        supplier.put("companyName", "Nike");
+
+        Long supplierId = SupplierFixtures.새로운_거래처_등록(supplier).as(Long.class);
+
+        Map<String, String> itemOne = new HashMap<>();
+        itemOne.put("name", "Nike Air Force 1 '07");
+        itemOne.put("unitPrice", "130000");
+        itemOne.put("sex", "MAN");
+        itemOne.put("category", "SHOES");
+
+        Map<String, String> itemTwo = new HashMap<>();
+        itemTwo.put("name", "Nike NRG Hoody");
+        itemTwo.put("unitPrice", "100000");
+        itemTwo.put("sex", "MAN");
+        itemTwo.put("category", "CLOTHES");
+
+        SupplierFixtures.새로운_아이템_등록(supplierId, itemOne);
+        SupplierFixtures.새로운_아이템_등록(supplierId, itemTwo);
     }
 
     @Test
@@ -37,19 +57,6 @@ public class OrderAcceptanceTest extends AcceptanceTest {
                     .accept(MediaType.APPLICATION_JSON_VALUE)
                 .when()
                     .get("/api/v1/customers/"+customerId+"/orders")
-                .then()
-                    .log().all()
-                .extract();
-    }
-
-    @Test
-    void getOrderDetail() {
-        ExtractableResponse<Response> response = RestAssured
-                .given()
-                    .log().all()
-                    .accept(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                    .get("/api/v1/customers/1/orders/1")
                 .then()
                     .log().all()
                 .extract();

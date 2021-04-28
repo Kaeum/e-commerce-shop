@@ -19,9 +19,16 @@ public class OrderLine extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
 
-    public OrderLine(Item item, String size) {
+    protected OrderLine() {}
+
+    private OrderLine(Item item, String size, Order order) {
         this.item = item;
         this.size = size;
+        this.order = order;
+    }
+
+    public static OrderLine createOrderLine(Item item, String size, Order order) {
+        return new OrderLine(item, size, order);
     }
 
     public Long getId() {

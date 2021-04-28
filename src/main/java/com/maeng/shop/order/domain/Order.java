@@ -21,15 +21,15 @@ public class Order extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderState orderState;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
-    private List<OrderLine> orderLines = new ArrayList<>();
+    protected Order() {}
 
-    public Order() {}
+    public static Order createOrder(Customer customer) {
+        return new Order(customer, OrderState.NEW);
+    }
 
-    public Order(Customer customer, OrderState orderState, List<OrderLine> orderLines) {
+    private Order(Customer customer, OrderState orderState) {
         this.customer = customer;
         this.orderState = orderState;
-        this.orderLines = orderLines;
     }
 
     public Long getId() {
@@ -42,9 +42,5 @@ public class Order extends BaseEntity {
 
     public OrderState getOrderState() {
         return orderState;
-    }
-
-    public List<OrderLine> getOrderLines() {
-        return orderLines;
     }
 }
