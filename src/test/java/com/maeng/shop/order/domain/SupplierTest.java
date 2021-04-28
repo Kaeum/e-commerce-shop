@@ -2,8 +2,6 @@ package com.maeng.shop.order.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class SupplierTest {
     private Supplier supplier;
 

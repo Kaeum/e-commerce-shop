@@ -8,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Feature: 고객과 관련된 기능을 담당한다.")
@@ -21,13 +23,12 @@ public class CustomerAcceptanceTest extends AcceptanceTest {
     @Test
     @DisplayName("Scenario: 회원가입한다.")
     void createCustomer() {
-        String email = "newmember1@email.com";
-        String password = "no_one_knows123";
-        String age = "20";
-        String name = "김철수";
+        Map<String, String> customer = CustomerFixtures.요청_고객_맵_생성("newmember1@email.com", "noone!knows123","20","김철수");
 
-        ExtractableResponse<Response> response = CustomerFixtures.회원가입(email, password, age, name);
+        ExtractableResponse<Response> response = CustomerFixtures.회원가입(customer);
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
         assertThat(response.header("Location")).isNotBlank();
     }
+
+
 }
