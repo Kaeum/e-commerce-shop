@@ -40,6 +40,11 @@ public class CustomerController {
                 .body(orderId);
     }
 
+    @GetMapping(path = "/api/v1/customer/{customerId}/orders/{orderId}")
+    public ResponseEntity<OrderDto> getOrder(@PathVariable final Long orderId) {
+        return ResponseEntity.ok(orderService.getOrder(orderId));
+    }
+
     @GetMapping(path = "/api/v1/customers/{customerId}/orders")
     public ResponseEntity<List<OrderDto>> getOrders(@PathVariable final Long customerId) {
         return ResponseEntity.ok(orderService.getOrders(customerId));

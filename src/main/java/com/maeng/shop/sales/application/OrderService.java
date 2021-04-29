@@ -68,4 +68,10 @@ public class OrderService {
 
         order.cancelOrder();
     }
+
+    public OrderDto getOrder(Long orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow(RuntimeException::new);
+
+        return OrderDto.toDto(order);
+    }
 }
