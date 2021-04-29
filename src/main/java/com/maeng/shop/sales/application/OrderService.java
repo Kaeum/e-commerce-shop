@@ -61,4 +61,11 @@ public class OrderService {
 
         return order.getId();
     }
+
+    @Transactional
+    public void cancelOrder(Long orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow(RuntimeException::new);
+
+        order.cancelOrder();
+    }
 }

@@ -40,4 +40,8 @@ public class Order extends BaseEntity {
     public OrderState getOrderState() {
         return orderState;
     }
+
+    public void cancelOrder() {
+        this.orderState = OrderState.CANCEL;
+    }
 }

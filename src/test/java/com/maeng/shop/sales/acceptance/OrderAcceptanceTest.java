@@ -1,6 +1,7 @@
 package com.maeng.shop.sales.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
+import com.maeng.shop.sales.domain.OrderState;
 import com.maeng.shop.sales.dto.OrderDto;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
@@ -89,21 +90,26 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         Long orderId = OrderFixtures.주문하기(customerId, orderOne).as(Long.class);
 
         // when
-        RestAssured.given().log().all()
+        ExtractableResponse<Response> response = RestAssured.given().log().all()
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .delete("/v1/api/customers/orders/"+orderId)
+                .delete("/v1/api/customers/"+customerId+"/orders/" + orderId)
                 .then().log().all()
                 .extract();
 
-        // then
-        List<Long> orderIds = OrderFixtures.주문_목록_조회(customerId)
-                .body()
-                .jsonPath()
-                .getList(".", OrderDto.class).stream()
-                    .map(OrderDto::getId)
-                    .collect(Collectors.toList());
+        OrderDto order = RestAssured
+                .given()
+                .log().all()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                .get("/v1/api/customers/"+customerId+"/orders/"+orderId)
+                .then()
+                .log().all()
+                .extract()
+                .as(OrderDto.class);
 
-        assertThat(orderIds).doesNotContain(orderId);
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
+        assertThat(order.getOrderState()).isEqualTo(OrderState.CANCEL);
     }
 }

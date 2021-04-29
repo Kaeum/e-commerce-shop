@@ -44,4 +44,13 @@ public class CustomerController {
     public ResponseEntity<List<OrderDto>> getOrders(@PathVariable final Long customerId) {
         return ResponseEntity.ok(orderService.getOrders(customerId));
     }
+
+    @DeleteMapping(path = "/api/v1/customer/{customerId}/orders/{orderId}")
+    public ResponseEntity<Void> cancelOrder(
+        @PathVariable Long customerId,
+        @PathVariable Long orderId
+    ) {
+        orderService.cancelOrder(orderId);
+        return ResponseEntity.noContent().build();
+    }
 }
