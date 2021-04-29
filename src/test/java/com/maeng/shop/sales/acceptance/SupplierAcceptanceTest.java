@@ -43,6 +43,4 @@ public class SupplierAcceptanceTest extends AcceptanceTest {
         // then
         아이템_등록_확인(response, item, supplierId);
     }
-
-
 }
