@@ -3,19 +3,14 @@ package com.maeng.shop.sales.acceptance;
 import com.maeng.shop.AcceptanceTest;
 import com.maeng.shop.sales.domain.OrderState;
 import com.maeng.shop.sales.dto.OrderDto;
-import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
-import org.hibernate.cache.cfg.internal.AbstractDomainDataCachingConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static com.maeng.shop.sales.acceptance.SupplierFixtures.요청_아이템_맵_생성;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -90,26 +85,13 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         Long orderId = OrderFixtures.주문하기(customerId, orderOne).as(Long.class);
 
         // when
-        ExtractableResponse<Response> response = RestAssured.given().log().all()
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                .delete("/v1/api/customers/"+customerId+"/orders/" + orderId)
-                .then().log().all()
-                .extract();
+        ExtractableResponse<Response> response = OrderFixtures.주문취소(customerId, orderId);
 
-        OrderDto order = RestAssured
-                .given()
-                .log().all()
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                .get("/v1/api/customers/"+customerId+"/orders/"+orderId)
-                .then()
-                .log().all()
-                .extract()
-                .as(OrderDto.class);
+        OrderDto order = OrderFixtures.주문_조회(customerId, orderId);
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
         assertThat(order.getOrderState()).isEqualTo(OrderState.CANCEL);
     }
+
 }

@@ -1,6 +1,9 @@
 package com.maeng.shop.sales.application;
 
-import com.maeng.shop.sales.domain.*;
+import com.maeng.shop.sales.domain.Customer;
+import com.maeng.shop.sales.domain.Item;
+import com.maeng.shop.sales.domain.Order;
+import com.maeng.shop.sales.domain.OrderLine;
 import com.maeng.shop.sales.dto.OrderDto;
 import com.maeng.shop.sales.dto.OrderLineRequest;
 import com.maeng.shop.sales.dto.PlaceOrderRequest;

@@ -17,7 +17,7 @@ public class CustomerController {
     private final OrderService orderService;
     private final CustomerService customerService;
 
-    public CustomerController(OrderService orderService, CustomerService customerService) {
+    public CustomerController(final OrderService orderService, final CustomerService customerService) {
         this.orderService = orderService;
         this.customerService = customerService;
     }
@@ -40,7 +40,7 @@ public class CustomerController {
                 .body(orderId);
     }
 
-    @GetMapping(path = "/api/v1/customer/{customerId}/orders/{orderId}")
+    @GetMapping(path = "/api/v1/customers/{customerId}/orders/{orderId}")
     public ResponseEntity<OrderDto> getOrder(@PathVariable final Long orderId) {
         return ResponseEntity.ok(orderService.getOrder(orderId));
     }
@@ -50,10 +50,9 @@ public class CustomerController {
         return ResponseEntity.ok(orderService.getOrders(customerId));
     }
 
-    @DeleteMapping(path = "/api/v1/customer/{customerId}/orders/{orderId}")
+    @DeleteMapping(path = "/api/v1/customers/{customerId}/orders/{orderId}")
     public ResponseEntity<Void> cancelOrder(
-        @PathVariable Long customerId,
-        @PathVariable Long orderId
+        @PathVariable final Long orderId
     ) {
         orderService.cancelOrder(orderId);
         return ResponseEntity.noContent().build();

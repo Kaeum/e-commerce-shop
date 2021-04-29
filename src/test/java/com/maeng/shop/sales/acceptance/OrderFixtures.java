@@ -1,5 +1,6 @@
 package com.maeng.shop.sales.acceptance;
 
+import com.maeng.shop.sales.dto.OrderDto;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -44,6 +45,28 @@ public class OrderFixtures {
                 .then()
                 .log().all()
                 .extract();
+    }
+
+    public static ExtractableResponse<Response> 주문취소(Long customerId, Long orderId) {
+        return RestAssured.given().log().all()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                .delete("/api/v1/customers/"+customerId+"/orders/" + orderId)
+                .then().log().all()
+                .extract();
+    }
+
+    public static OrderDto 주문_조회(Long customerId, Long orderId) {
+        return RestAssured
+                .given()
+                .log().all()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                .get("/api/v1/customers/"+customerId+"/orders/"+orderId)
+                .then()
+                .log().all()
+                .extract()
+                .as(OrderDto.class);
     }
 
     public static ExtractableResponse<Response> 주문_목록_조회(Long customerId) {
