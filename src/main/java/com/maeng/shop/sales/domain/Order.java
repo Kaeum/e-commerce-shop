@@ -1,6 +1,7 @@
 package com.maeng.shop.sales.domain;
 
 import com.maeng.shop.common.BaseEntity;
+import com.maeng.shop.sales.exception.CannotCancelException;
 
 import javax.persistence.*;
 
@@ -42,6 +43,14 @@ public class Order extends BaseEntity {
     }
 
     public void cancelOrder() {
+        checkOrderCanBeCanceled();
+
         this.orderState = OrderState.CANCEL;
+    }
+
+    private void checkOrderCanBeCanceled() {
+        if(!OrderState.NEW.equals(orderState)) {
+            throw new CannotCancelException();
+        }
     }
 }

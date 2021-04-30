@@ -98,7 +98,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    @DisplayName("Scenario: 고객은 NEW 상태인 주문 취소할 수 있다.")
+    @DisplayName("Scenario: 고객은 NEW 상태인 주문만 취소할 수 있다.")
     void cancelOrderTest_notWithNewOrder() {
         // given
         Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");
@@ -113,6 +113,5 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR.value());
         assertThat(response.as(CommonResponse.class).getReturnMessage()).isEqualTo(CannotCancelException.CANNOT_CANCEL_MESSAGE);
-
     }
 }
