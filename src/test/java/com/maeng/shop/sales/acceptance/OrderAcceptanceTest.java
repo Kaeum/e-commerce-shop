@@ -1,8 +1,10 @@
 package com.maeng.shop.sales.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
+import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.sales.domain.OrderState;
 import com.maeng.shop.sales.dto.OrderDto;
+import com.maeng.shop.sales.exception.CannotCancelException;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +16,7 @@ import java.util.Map;
 
 import static com.maeng.shop.sales.acceptance.SupplierFixtures.요청_아이템_맵_생성;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("Feature: 주문과 관련된 기능을 관리한다.")
 public class OrderAcceptanceTest extends AcceptanceTest {
@@ -94,4 +97,22 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         assertThat(order.getOrderState()).isEqualTo(OrderState.CANCEL);
     }
 
+    @Test
+    @DisplayName("Scenario: 고객은 NEW 상태인 주문 취소할 수 있다.")
+    void cancelOrderTest_notWithNewOrder() {
+        // given
+        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");
+        Map<String, Object> orderOne = OrderFixtures.요청_주문_맵_생성(orderLineOne);
+
+        Long orderId = OrderFixtures.주문하기(customerId, orderOne).as(Long.class);
+        OrderFixtures.주문취소(customerId, orderId);
+
+        // when
+        ExtractableResponse<Response> response = OrderFixtures.주문취소(customerId, orderId);
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        assertThat(response.as(CommonResponse.class).getReturnMessage()).isEqualTo(CannotCancelException.CANNOT_CANCEL_MESSAGE);
+
+    }
 }
