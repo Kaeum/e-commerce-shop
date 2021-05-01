@@ -1,6 +1,8 @@
 package com.maeng.shop.sales.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
+import com.maeng.shop.common.CommonResponse;
+import com.maeng.shop.sales.domain.Customer;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,11 +30,11 @@ public class CustomerAcceptanceTest extends AcceptanceTest {
 
         // when
         ExtractableResponse<Response> response = CustomerFixtures.회원가입(customer);
+        CommonResponse commonResponse = response.as(CommonResponse.class);
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
-        assertThat(response.header("Location")).isNotBlank();
+        assertThat(commonResponse.getSuccessOrNot()).isEqualTo("Y");
+        assertThat(commonResponse.getReturnData()).isEqualTo(1);
     }
-
-
 }

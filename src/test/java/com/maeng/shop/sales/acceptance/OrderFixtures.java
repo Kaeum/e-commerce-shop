@@ -37,47 +37,49 @@ public class OrderFixtures {
     public static ExtractableResponse<Response> 주문하기(Long customerId, Map<String, Object> order) {
         return RestAssured
                 .given()
-                .log().all()
-                .body(order)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .log().all()
+                    .body(order)
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .post("/api/v1/customers/" + customerId + "/orders")
+                    .post("/api/v1/customers/" + customerId + "/orders")
                 .then()
-                .log().all()
+                    .log().all()
                 .extract();
     }
 
     public static ExtractableResponse<Response> 주문취소(Long customerId, Long orderId) {
-        return RestAssured.given().log().all()
-                .accept(MediaType.APPLICATION_JSON_VALUE)
+        return RestAssured
+                .given()
+                    .log().all()
+                    .accept(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .delete("/api/v1/customers/"+customerId+"/orders/" + orderId)
-                .then().log().all()
+                    .delete("/api/v1/customers/"+customerId+"/orders/" + orderId)
+                .then()
+                    .log().all()
                 .extract();
     }
 
-    public static OrderDto 주문_조회(Long customerId, Long orderId) {
+    public static ExtractableResponse<Response> 주문_조회(Long customerId, Long orderId) {
         return RestAssured
                 .given()
-                .log().all()
-                .accept(MediaType.APPLICATION_JSON_VALUE)
+                    .log().all()
+                    .accept(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .get("/api/v1/customers/"+customerId+"/orders/"+orderId)
+                    .get("/api/v1/customers/"+customerId+"/orders/"+orderId)
                 .then()
-                .log().all()
-                .extract()
-                .as(OrderDto.class);
+                    .log().all()
+                .extract();
     }
 
     public static ExtractableResponse<Response> 주문_목록_조회(Long customerId) {
         return RestAssured
                 .given()
-                .log().all()
-                .accept(MediaType.APPLICATION_JSON_VALUE)
+                    .log().all()
+                    .accept(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                .get("/api/v1/customers/"+ customerId +"/orders")
+                    .get("/api/v1/customers/"+ customerId +"/orders")
                 .then()
-                .log().all()
+                    .log().all()
                 .extract();
     }
 }

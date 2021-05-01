@@ -1,19 +1,21 @@
 package com.maeng.shop.common;
 
 public class CommonResponse<T> {
-    public static final String COMMON_RETURN_CODE_5000 = "5000";
+    public static final String SUCCESS_OR_NOT_Y = "Y";
+    public static final String SUCCESS_OR_NOT_N = "N";
+    public static final String SUCCESS_MESSAGE = "Request has succeeded";
 
-    private String returnCode;
+    private String successOrNot;
     private String returnMessage;
     private T returnData;
 
     public static class Builder<T> {
-        private String returnCode;
+        private String successOrNot;
         private String returnMessage;
         private T returnData;
 
-        public Builder<T> returnCode(String returnCode) {
-            this.returnCode = returnCode;
+        public Builder<T> successOrNot(String returnCode) {
+            this.successOrNot = returnCode;
             return this;
         }
 
@@ -39,13 +41,35 @@ public class CommonResponse<T> {
     private CommonResponse() {}
 
     private CommonResponse(Builder builder) {
-        this.returnCode = builder.returnCode;
+        this.successOrNot = builder.successOrNot;
         this.returnMessage = builder.returnMessage;
         this.returnData = (T) builder.returnData;
     }
 
-    public String getReturnCode() {
-        return returnCode;
+    public static CommonResponse onSuccess() {
+        return new Builder<Void>()
+                .successOrNot(SUCCESS_OR_NOT_Y)
+                .returnMessage(SUCCESS_MESSAGE)
+                .build();
+    }
+
+    public static <T> CommonResponse onSuccess(T returnData) {
+        return new Builder<T>()
+                .successOrNot(SUCCESS_OR_NOT_Y)
+                .returnMessage(SUCCESS_MESSAGE)
+                .returnData(returnData)
+                .build();
+    }
+
+    public static CommonResponse onFailure(RuntimeException ex) {
+        return new Builder<Void>()
+                .successOrNot(SUCCESS_OR_NOT_N)
+                .returnMessage(ex.getMessage())
+                .build();
+    }
+
+    public String getSuccessOrNot() {
+        return successOrNot;
     }
 
     public String getReturnMessage() {

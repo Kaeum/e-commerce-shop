@@ -11,14 +11,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CannotCancelException.class)
-    public ResponseEntity<CommonResponse<Void>> handleCityNotFoundException(
-            CannotCancelException ex) {
-
-        CommonResponse<Void> response = CommonResponse.Builder.builder()
-            .returnCode(CommonResponse.COMMON_RETURN_CODE_5000)
-            .returnMessage(ex.getMessage())
-            .build();
-
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<CommonResponse<Void>> handleCannotCancelException(
+            CannotCancelException exception) {
+        return new ResponseEntity<>(CommonResponse.onFailure(exception), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

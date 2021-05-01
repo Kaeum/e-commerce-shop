@@ -16,7 +16,6 @@ import java.util.Map;
 
 import static com.maeng.shop.sales.acceptance.SupplierFixtures.요청_아이템_맵_생성;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("Feature: 주문과 관련된 기능을 관리한다.")
 public class OrderAcceptanceTest extends AcceptanceTest {
@@ -29,16 +28,16 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         super.setUp();
 
         Map<String, String> customer = CustomerFixtures.요청_고객_맵_생성("newmember1@email.com", "noone!knows123","20","김철수");
-        customerId = CustomerFixtures.회원가입(customer).as(Long.class);
+        customerId = Long.parseLong(String.valueOf(CustomerFixtures.회원가입(customer).as(CommonResponse.class).getReturnData()));
 
         Map<String, String> supplier = SupplierFixtures.요청_거래처_맵_생성("Nike");
-        Long supplierId = SupplierFixtures.새로운_거래처_등록(supplier).as(Long.class);
+        Long supplierId = Long.parseLong(String.valueOf(SupplierFixtures.새로운_거래처_등록(supplier).as(CommonResponse.class).getReturnData()));
 
         Map<String, String> itemOne = 요청_아이템_맵_생성("Nike Air Force 1 '07", "130000", "MAN", "SHOES");
         Map<String, String> itemTwo = 요청_아이템_맵_생성("Nike NRG Hoody", "100000", "MAN", "CLOTHES");
 
-        itemOneId = SupplierFixtures.새로운_아이템_등록(supplierId, itemOne).as(Long.class);
-        itemTwoId = SupplierFixtures.새로운_아이템_등록(supplierId, itemTwo).as(Long.class);
+        itemOneId = Long.parseLong(String.valueOf(SupplierFixtures.새로운_아이템_등록(supplierId, itemOne).as(CommonResponse.class).getReturnData()));
+        itemTwoId = Long.parseLong(String.valueOf(SupplierFixtures.새로운_아이템_등록(supplierId, itemTwo).as(CommonResponse.class).getReturnData()));
     }
 
     @Test
@@ -51,10 +50,12 @@ public class OrderAcceptanceTest extends AcceptanceTest {
 
         // when
         ExtractableResponse<Response> response = OrderFixtures.주문하기(customerId, order);
+        CommonResponse responseBody = response.as(CommonResponse.class);
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
-        assertThat(response.as(Long.class)).isEqualTo(1);
+        assertThat(responseBody.getSuccessOrNot()).isEqualTo("Y");
+        assertThat(responseBody.getReturnData()).isEqualTo(1);
     }
 
     @Test
@@ -90,7 +91,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         // when
         ExtractableResponse<Response> response = OrderFixtures.주문취소(customerId, orderId);
 
-        OrderDto order = OrderFixtures.주문_조회(customerId, orderId);
+        OrderDto order = OrderFixtures.주문_조회(customerId, orderId).as(OrderDto.class);
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
