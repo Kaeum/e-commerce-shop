@@ -2,10 +2,10 @@ package com.maeng.shop.sales.application;
 
 import com.maeng.shop.sales.domain.Item;
 import com.maeng.shop.sales.domain.Supplier;
-import com.maeng.shop.sales.dto.ItemDto;
+import com.maeng.shop.sales.dto.ItemResponse;
 import com.maeng.shop.sales.dto.RegisterItemRequest;
 import com.maeng.shop.sales.dto.RegisterSupplierRequest;
-import com.maeng.shop.sales.dto.SupplierDto;
+import com.maeng.shop.sales.dto.SupplierResponse;
 import com.maeng.shop.sales.repository.ItemRepository;
 import com.maeng.shop.sales.repository.SupplierRepository;
 import org.springframework.stereotype.Service;
@@ -46,12 +46,12 @@ public class SupplierService {
         return item.getId();
     }
 
-    public SupplierDto getSupplier(Long supplierId) {
+    public SupplierResponse getSupplier(Long supplierId) {
         Supplier supplier = supplierRepository.findById(supplierId).orElseThrow(RuntimeException::new);
         return supplier.toDto();
     }
 
-    public List<ItemDto> getItemsBySupplierId(Long supplierId) {
+    public List<ItemResponse> getItemsBySupplierId(Long supplierId) {
         List<Item> items = itemRepository.findAllBySupplierId(supplierId);
 
         return items.stream()

@@ -1,6 +1,5 @@
 package com.maeng.shop.sales.acceptance;
 
-import com.maeng.shop.sales.dto.OrderDto;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;

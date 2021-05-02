@@ -3,7 +3,7 @@ package com.maeng.shop.sales.dto;
 import com.maeng.shop.sales.domain.Category;
 import com.maeng.shop.sales.domain.Sex;
 
-public class ItemDto {
+public class ItemResponse {
     private Long id;
 
     private String name;
@@ -14,7 +14,7 @@ public class ItemDto {
 
     private Category category;
 
-    public ItemDto(Long id, String name, int unitPrice, Sex sex, Category category) {
+    public ItemResponse(Long id, String name, int unitPrice, Sex sex, Category category) {
         this.id = id;
         this.name = name;
         this.unitPrice = unitPrice;

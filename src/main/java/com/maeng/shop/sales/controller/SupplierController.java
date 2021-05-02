@@ -1,10 +1,10 @@
 package com.maeng.shop.sales.controller;
 
 import com.maeng.shop.sales.application.SupplierService;
-import com.maeng.shop.sales.dto.ItemDto;
+import com.maeng.shop.sales.dto.ItemResponse;
 import com.maeng.shop.sales.dto.RegisterItemRequest;
 import com.maeng.shop.sales.dto.RegisterSupplierRequest;
-import com.maeng.shop.sales.dto.SupplierDto;
+import com.maeng.shop.sales.dto.SupplierResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +20,8 @@ public class SupplierController {
     }
 
     @GetMapping(path = "/api/v1/suppliers/{supplierId}")
-    public ResponseEntity<SupplierDto> getSupplier(@PathVariable final Long supplierId) {
-        SupplierDto supplier = supplierService.getSupplier(supplierId);
+    public ResponseEntity<SupplierResponse> getSupplier(@PathVariable final Long supplierId) {
+        SupplierResponse supplier = supplierService.getSupplier(supplierId);
         return ResponseEntity.ok(supplier);
     }
 
@@ -42,7 +42,7 @@ public class SupplierController {
     }
 
     @GetMapping(path = "/api/v1/suppliers/{supplierId}/items")
-    public ResponseEntity<List<ItemDto>> getItemsBySupplierId(@PathVariable final Long supplierId) {
+    public ResponseEntity<List<ItemResponse>> getItemsBySupplierId(@PathVariable final Long supplierId) {
         return ResponseEntity.ok(supplierService.getItemsBySupplierId(supplierId));
     }
 }

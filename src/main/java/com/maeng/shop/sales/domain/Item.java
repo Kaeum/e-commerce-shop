@@ -1,7 +1,7 @@
 package com.maeng.shop.sales.domain;
 
 import com.maeng.shop.common.BaseEntity;
-import com.maeng.shop.sales.dto.ItemDto;
+import com.maeng.shop.sales.dto.ItemResponse;
 
 import javax.persistence.*;
 
@@ -39,7 +39,7 @@ public class Item extends BaseEntity {
         return id;
     }
 
-    public ItemDto toItemDto() {
-        return new ItemDto(id, name, unitPrice, sex, category);
+    public ItemResponse toItemDto() {
+        return new ItemResponse(id, name, unitPrice, sex, category);
     }
 }

@@ -1,11 +1,11 @@
 package com.maeng.shop.sales.dto;
 
-public class SupplierDto {
+public class SupplierResponse {
     private Long id;
 
     private String companyName;
 
-    public SupplierDto(Long id, String companyName) {
+    public SupplierResponse(Long id, String companyName) {
         this.id = id;
         this.companyName = companyName;
     }

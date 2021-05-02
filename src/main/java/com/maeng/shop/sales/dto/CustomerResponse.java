@@ -2,7 +2,7 @@ package com.maeng.shop.sales.dto;
 
 import com.maeng.shop.sales.domain.Customer;
 
-public class CustomerDto {
+public class CustomerResponse {
     private Long id;
 
     private String email;
@@ -27,17 +27,17 @@ public class CustomerDto {
         return name;
     }
 
-    public CustomerDto() {
+    public CustomerResponse() {
     }
 
-    public CustomerDto(Long id, String email, int age, String name) {
+    public CustomerResponse(Long id, String email, int age, String name) {
         this.id = id;
         this.email = email;
         this.age = age;
         this.name = name;
     }
 
-    public static CustomerDto toDto(Customer customer) {
-        return new CustomerDto(customer.getId(), customer.getEmail(), customer.getAge(), customer.getName());
+    public static CustomerResponse toResponse(Customer customer) {
+        return new CustomerResponse(customer.getId(), customer.getEmail(), customer.getAge(), customer.getName());
     }
 }

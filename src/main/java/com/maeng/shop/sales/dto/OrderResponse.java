@@ -3,15 +3,15 @@ package com.maeng.shop.sales.dto;
 import com.maeng.shop.sales.domain.Order;
 import com.maeng.shop.sales.domain.OrderState;
 
-public class OrderDto {
+public class OrderResponse {
 
     private Long id;
 
-    private CustomerDto customer;
+    private CustomerResponse customer;
 
     private OrderState orderState;
 
-    public OrderDto(Long id, CustomerDto customer, OrderState orderState) {
+    public OrderResponse(Long id, CustomerResponse customer, OrderState orderState) {
         this.id = id;
         this.customer = customer;
         this.orderState = orderState;
@@ -21,7 +21,7 @@ public class OrderDto {
         return id;
     }
 
-    public CustomerDto getCustomer() {
+    public CustomerResponse getCustomer() {
         return customer;
     }
 
@@ -29,10 +29,10 @@ public class OrderDto {
         return orderState;
     }
 
-    public static OrderDto toDto(Order order) {
-        return new OrderDto(
+    public static OrderResponse toResponse(Order order) {
+        return new OrderResponse(
                 order.getId(),
-                CustomerDto.toDto(order.getCustomer()),
+                CustomerResponse.toResponse(order.getCustomer()),
                 order.getOrderState()
         );
     }

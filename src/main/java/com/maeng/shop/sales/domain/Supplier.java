@@ -2,7 +2,7 @@ package com.maeng.shop.sales.domain;
 
 import com.maeng.shop.common.BaseEntity;
 import com.maeng.shop.sales.dto.RegisterSupplierRequest;
-import com.maeng.shop.sales.dto.SupplierDto;
+import com.maeng.shop.sales.dto.SupplierResponse;
 
 import javax.persistence.*;
 
@@ -30,7 +30,7 @@ public class Supplier extends BaseEntity {
         return id;
     }
 
-    public SupplierDto toDto() {
-        return new SupplierDto(id, companyName);
+    public SupplierResponse toDto() {
+        return new SupplierResponse(id, companyName);
     }
 }

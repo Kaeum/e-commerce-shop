@@ -3,7 +3,7 @@ package com.maeng.shop.sales.acceptance;
 import com.maeng.shop.AcceptanceTest;
 import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.sales.domain.OrderState;
-import com.maeng.shop.sales.dto.OrderDto;
+import com.maeng.shop.sales.dto.OrderResponse;
 import com.maeng.shop.sales.exception.CannotCancelException;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -76,7 +76,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(response.body().jsonPath().getList(".", OrderDto.class).size()).isEqualTo(2);
+        assertThat(response.body().jsonPath().getList(".", OrderResponse.class).size()).isEqualTo(2);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         // when
         ExtractableResponse<Response> response = OrderFixtures.주문취소(customerId, orderId);
 
-        OrderDto order = OrderFixtures.주문_조회(customerId, orderId).as(OrderDto.class);
+        OrderResponse order = OrderFixtures.주문_조회(customerId, orderId).as(OrderResponse.class);
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());

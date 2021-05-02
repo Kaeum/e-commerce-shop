@@ -3,7 +3,7 @@ package com.maeng.shop.sales.controller;
 import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.sales.application.CustomerService;
 import com.maeng.shop.sales.application.OrderService;
-import com.maeng.shop.sales.dto.OrderDto;
+import com.maeng.shop.sales.dto.OrderResponse;
 import com.maeng.shop.sales.dto.PlaceOrderRequest;
 import com.maeng.shop.sales.dto.SignupRequest;
 import org.springframework.http.HttpStatus;
@@ -44,14 +44,14 @@ public class CustomerController {
 
     @GetMapping(path = "/api/v1/customers/{customerId}/orders/{orderId}")
     public ResponseEntity<CommonResponse> getOrder(@PathVariable final Long orderId) {
-        OrderDto orderDto = orderService.getOrder(orderId);
-        return ResponseEntity.ok(CommonResponse.onSuccess(orderDto));
+        OrderResponse orderResponse = orderService.getOrder(orderId);
+        return ResponseEntity.ok(CommonResponse.onSuccess(orderResponse));
     }
 
     @GetMapping(path = "/api/v1/customers/{customerId}/orders")
     public ResponseEntity<CommonResponse> getOrders(@PathVariable final Long customerId) {
-        List<OrderDto> orderDtos = orderService.getOrders(customerId);
-        return ResponseEntity.ok(CommonResponse.onSuccess(orderDtos));
+        List<OrderResponse> orderResponses = orderService.getOrders(customerId);
+        return ResponseEntity.ok(CommonResponse.onSuccess(orderResponses));
     }
 
     @DeleteMapping(path = "/api/v1/customers/{customerId}/orders/{orderId}")

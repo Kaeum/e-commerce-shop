@@ -4,7 +4,7 @@ import com.maeng.shop.sales.domain.Customer;
 import com.maeng.shop.sales.domain.Item;
 import com.maeng.shop.sales.domain.Order;
 import com.maeng.shop.sales.domain.OrderLine;
-import com.maeng.shop.sales.dto.OrderDto;
+import com.maeng.shop.sales.dto.OrderResponse;
 import com.maeng.shop.sales.dto.OrderLineRequest;
 import com.maeng.shop.sales.dto.PlaceOrderRequest;
 import com.maeng.shop.sales.repository.ItemRepository;
@@ -32,10 +32,10 @@ public class OrderService {
         this.itemRepository = itemRepository;
     }
 
-    public List<OrderDto> getOrders(Long customerId) {
+    public List<OrderResponse> getOrders(Long customerId) {
         List<Order> orders = orderRepository.findAllByCustomerId(customerId);
         return orders.stream()
-                .map(OrderDto::toDto)
+                .map(OrderResponse::toResponse)
                 .collect(Collectors.toList());
     }
 
@@ -72,9 +72,9 @@ public class OrderService {
         order.cancelOrder();
     }
 
-    public OrderDto getOrder(Long orderId) {
+    public OrderResponse getOrder(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(RuntimeException::new);
 
-        return OrderDto.toDto(order);
+        return OrderResponse.toResponse(order);
     }
 }
