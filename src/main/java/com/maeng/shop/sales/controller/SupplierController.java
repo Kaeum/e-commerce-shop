@@ -1,5 +1,6 @@
 package com.maeng.shop.sales.controller;
 
+import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.sales.application.SupplierService;
 import com.maeng.shop.sales.dto.ItemResponse;
 import com.maeng.shop.sales.dto.RegisterItemRequest;
@@ -26,23 +27,25 @@ public class SupplierController {
     }
 
     @PostMapping(path = "/api/v1/suppliers")
-    public ResponseEntity<Long> registerSupplier(@RequestBody final RegisterSupplierRequest registerSupplierRequest) {
+    public ResponseEntity<CommonResponse> registerSupplier(@RequestBody final RegisterSupplierRequest registerSupplierRequest) {
         Long supplierId = supplierService.registerSupplier(registerSupplierRequest);
         return ResponseEntity.created(URI.create("/api/v1/suppliers/" + supplierId))
-                .body(supplierId);
+                .body(CommonResponse.onSuccess(supplierId));
     }
 
     @PostMapping(path = "/api/v1/suppliers/{supplierId}/items")
-    public ResponseEntity<Long> registerItem(
+    public ResponseEntity<CommonResponse> registerItem(
             @PathVariable final Long supplierId,
             @RequestBody final RegisterItemRequest registerItemRequest
     ) {
         Long itemId = supplierService.registerItem(registerItemRequest, supplierId);
-        return ResponseEntity.created(URI.create("/api/v1/suppliers/"+supplierId+"/items/"+itemId)).body(itemId);
+        return ResponseEntity.created(URI.create("/api/v1/suppliers/"+supplierId+"/items/"+itemId))
+                .body(CommonResponse.onSuccess(itemId));
     }
 
     @GetMapping(path = "/api/v1/suppliers/{supplierId}/items")
-    public ResponseEntity<List<ItemResponse>> getItemsBySupplierId(@PathVariable final Long supplierId) {
-        return ResponseEntity.ok(supplierService.getItemsBySupplierId(supplierId));
+    public ResponseEntity<CommonResponse> getItemsBySupplierId(@PathVariable final Long supplierId) {
+        List<ItemResponse> items = supplierService.getItemsBySupplierId(supplierId);
+        return ResponseEntity.ok(CommonResponse.onSuccess(items));
     }
 }

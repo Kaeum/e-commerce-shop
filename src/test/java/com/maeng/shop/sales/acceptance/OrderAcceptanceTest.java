@@ -3,6 +3,7 @@ package com.maeng.shop.sales.acceptance;
 import com.maeng.shop.AcceptanceTest;
 import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.sales.domain.OrderState;
+import com.maeng.shop.sales.dto.ItemResponse;
 import com.maeng.shop.sales.dto.OrderResponse;
 import com.maeng.shop.sales.exception.CannotCancelException;
 import io.restassured.response.ExtractableResponse;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.maeng.shop.sales.acceptance.SupplierFixtures.요청_아이템_맵_생성;
@@ -76,7 +78,10 @@ public class OrderAcceptanceTest extends AcceptanceTest {
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(response.body().jsonPath().getList(".", OrderResponse.class).size()).isEqualTo(2);
+
+        List<ItemResponse> items = (List<ItemResponse>) response.body().as(CommonResponse.class).getReturnData();
+        assertThat(items.size()).isEqualTo(2);
+
     }
 
     @Test
@@ -86,16 +91,13 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");
         Map<String, Object> orderOne = OrderFixtures.요청_주문_맵_생성(orderLineOne);
 
-        Long orderId = OrderFixtures.주문하기(customerId, orderOne).as(Long.class);
+        Long orderId = Long.parseLong(String.valueOf(OrderFixtures.주문하기(customerId, orderOne).as(CommonResponse.class).getReturnData()));
 
         // when
         ExtractableResponse<Response> response = OrderFixtures.주문취소(customerId, orderId);
 
-        OrderResponse order = OrderFixtures.주문_조회(customerId, orderId).as(OrderResponse.class);
-
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
-        assertThat(order.getOrderState()).isEqualTo(OrderState.CANCEL);
     }
 
     @Test
@@ -105,7 +107,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");
         Map<String, Object> orderOne = OrderFixtures.요청_주문_맵_생성(orderLineOne);
 
-        Long orderId = OrderFixtures.주문하기(customerId, orderOne).as(Long.class);
+        Long orderId = Long.parseLong(String.valueOf(OrderFixtures.주문하기(customerId, orderOne).as(CommonResponse.class).getReturnData()));
         OrderFixtures.주문취소(customerId, orderId);
 
         // when
