@@ -97,7 +97,10 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         ExtractableResponse<Response> response = OrderFixtures.주문취소(customerId, orderId);
 
         // then
+        ExtractableResponse<Response> getResponse = OrderFixtures.주문_조회(customerId, orderId);
+
         assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
+        assertThat(getResponse.jsonPath().getString("returnData.orderState")).isEqualTo(OrderState.CANCEL.toString());
     }
 
     @Test
