@@ -31,12 +31,13 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 }
 
-test {
-    useJUnitPlatform()
-}
-
 ext {
     snippetsDir = file('build/generated-snippets')
+}
+
+test {
+    useJUnitPlatform()
+    outputs.dir snippetsDir
 }
 
 task testDocument(type: Test) {
