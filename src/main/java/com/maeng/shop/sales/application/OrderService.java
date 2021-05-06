@@ -50,6 +50,10 @@ public class OrderService {
                 .map(OrderLineRequest::getSize)
                 .collect(Collectors.toList());
 
+        List<Integer> orderPrices = placeOrderRequest.getOrderLines().stream()
+                .map(OrderLineRequest::getOrderPrice)
+                .collect(Collectors.toList());
+
         List<Long> itemIds = placeOrderRequest.getOrderLines().stream()
             .map(OrderLineRequest::getItemId)
             .collect(Collectors.toList());
@@ -59,7 +63,8 @@ public class OrderService {
         IntStream.range(0, items.size()).forEach(i -> {
             Item item = items.get(i);
             String size = sizes.get(i);
-            orderLineRepository.save(OrderLine.createOrderLine(item, size, order));
+            int orderPrice = orderPrices.get(i);
+            orderLineRepository.save(OrderLine.createOrderLine(item, size, orderPrice, order));
         });
 
         return order.getId();

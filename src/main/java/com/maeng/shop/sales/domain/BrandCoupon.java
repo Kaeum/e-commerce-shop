@@ -8,5 +8,4 @@ public class BrandCoupon extends Coupon{
 
     @OneToOne(fetch = FetchType.LAZY)
     private Supplier supplier;
-
 }

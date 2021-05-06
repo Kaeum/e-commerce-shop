@@ -4,6 +4,8 @@ public class OrderLineRequest {
 
     private Long itemId;
 
+    private int orderPrice;
+
     private String size;
 
     public Long getItemId() {
@@ -12,5 +14,9 @@ public class OrderLineRequest {
 
     public String getSize() {
         return size;
+    }
+
+    public int getOrderPrice() {
+        return orderPrice;
     }
 }

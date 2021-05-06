@@ -7,7 +7,9 @@ import java.util.List;
 public class PlaceOrderRequest {
     private List<OrderLineRequest> orderLines;
 
-    public PlaceOrderRequest(Customer customerId, List<OrderLineRequest> orderLines) {
+    public PlaceOrderRequest() {}
+
+    public PlaceOrderRequest(List<OrderLineRequest> orderLines) {
         this.orderLines = orderLines;
     }
 

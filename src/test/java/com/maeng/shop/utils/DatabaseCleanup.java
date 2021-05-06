@@ -24,9 +24,12 @@ public class DatabaseCleanup implements InitializingBean {
     public void afterPropertiesSet() {
         tableNames = entityManager.getMetamodel().getEntities().stream()
                 .filter(e -> e.getJavaType().getAnnotation(Entity.class) != null)
+                .filter(e -> e.getName().toLowerCase().endsWith("coupons"))
                 .map(e -> CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, e.getName()))
                 .map(s -> s.concat("s"))
                 .collect(Collectors.toList());
+
+        tableNames.add("coupons");
     }
 
     @Transactional

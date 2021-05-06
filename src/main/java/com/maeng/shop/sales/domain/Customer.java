@@ -4,6 +4,7 @@ import com.maeng.shop.common.BaseEntity;
 import com.maeng.shop.sales.dto.SignupRequest;
 
 import javax.persistence.*;
+import java.lang.reflect.Member;
 
 @Entity
 @Table(name = "customers")
@@ -21,20 +22,26 @@ public class Customer extends BaseEntity {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    private MemberLevel memberLevel;
+
     protected Customer() {}
 
-    public Customer(String email, String password, int age, String name) {
+    public Customer(String email, String password, int age, String name, MemberLevel memberLevel) {
         this.email = email;
         this.password = password;
         this.age = age;
         this.name = name;
+        this.memberLevel = memberLevel;
     }
 
     public Customer(SignupRequest signupRequest) {
         this(signupRequest.getEmail()
                     ,signupRequest.getPassword()
                     ,signupRequest.getAge()
-                    ,signupRequest.getName());
+                    ,signupRequest.getName()
+                    ,MemberLevel.BRONZE
+        );
     }
 
     public Long getId() {

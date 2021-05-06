@@ -16,19 +16,22 @@ public class OrderLine extends BaseEntity {
 
     private String size;
 
+    private int orderPrice;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
 
     protected OrderLine() {}
 
-    private OrderLine(Item item, String size, Order order) {
+    public OrderLine(Item item, String size, int orderPrice, Order order) {
         this.item = item;
         this.size = size;
+        this.orderPrice = orderPrice;
         this.order = order;
     }
 
-    public static OrderLine createOrderLine(Item item, String size, Order order) {
-        return new OrderLine(item, size, order);
+    public static OrderLine createOrderLine(Item item, String size, int orderPrice, Order order) {
+        return new OrderLine(item, size, orderPrice, order);
     }
 
     public Long getId() {
