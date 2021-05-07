@@ -3,7 +3,9 @@ package com.maeng.shop.sales.controller;
 import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.sales.application.CouponService;
 import com.maeng.shop.sales.dto.CreateCouponRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,12 +22,23 @@ public class CouponController {
 
     @PostMapping(path = "/api/v1/coupons")
     public ResponseEntity<CommonResponse> createCoupon(
-        @RequestBody final CreateCouponRequest couponRequest
+            @RequestBody final CreateCouponRequest couponRequest
     ) {
         Long couponId = couponService.createCoupon(couponRequest);
 
         return ResponseEntity
                 .created(URI.create("/api/v1/coupons/" + couponId))
                 .body(CommonResponse.onSuccess(couponId));
+    }
+
+    @PostMapping(path = "/api/v1/customers/{customerId}/coupons/{couponId}")
+    public ResponseEntity<CommonResponse> issueCoupon(
+            @PathVariable Long customerId,
+            @PathVariable Long couponId
+    ) {
+        couponService.issueCoupon(customerId, couponId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+
     }
 }

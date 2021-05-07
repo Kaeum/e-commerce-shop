@@ -58,7 +58,7 @@ public class CouponAcceptanceTest extends AcceptanceTest {
     void issueCoupon() {
         // given
         Map<String, String> coupon = CouponFixtures.요청_멤버_쿠폰_맵_생성("member", "나이키 5% 할인 쿠폰", "5", "10000", "BRONZE");
-        Long couponId = (Long) CouponFixtures.쿠폰_생성(coupon).as(CommonResponse.class).getReturnData();
+        Long couponId = Long.parseLong(String.valueOf(CouponFixtures.쿠폰_생성(coupon).as(CommonResponse.class).getReturnData()));
 
         // when
         ExtractableResponse<Response> response = RestAssured.given().log().all().contentType(MediaType.APPLICATION_JSON_VALUE).body(coupon)
