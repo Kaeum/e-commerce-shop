@@ -4,7 +4,6 @@ import com.maeng.shop.common.BaseEntity;
 import com.maeng.shop.sales.dto.SignupRequest;
 
 import javax.persistence.*;
-import java.lang.reflect.Member;
 
 @Entity
 @Table(name = "customers")

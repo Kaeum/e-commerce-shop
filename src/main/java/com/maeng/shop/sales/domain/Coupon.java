@@ -14,11 +14,9 @@ public abstract class Coupon extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Customer customer;
-
     private int discountRate;
 
     private int maxAmount;
+
 
 }

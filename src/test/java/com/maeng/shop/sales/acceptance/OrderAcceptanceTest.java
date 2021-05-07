@@ -46,8 +46,8 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     @DisplayName("Scenario: 고객은 등록된 품목들을 주문할 수 있다.")
     void placeOrderTest() {
         // given
-        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");
-        Map<String, String> orderLineTwo = OrderFixtures.요청_주문품목_맵_생성(itemTwoId, "S");
+        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "130000","L");
+        Map<String, String> orderLineTwo = OrderFixtures.요청_주문품목_맵_생성(itemTwoId, "100000","S");
         Map<String, Object> order = OrderFixtures.요청_주문_맵_생성(orderLineOne, orderLineTwo);
 
         // when
@@ -64,10 +64,10 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     @DisplayName("Scenario: 고객이 어떤 주문을 했는지 조회할 수 있다.")
     void getOrdersTest() {
         // given
-        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");
+        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "130000", "L");
         Map<String, Object> orderOne = OrderFixtures.요청_주문_맵_생성(orderLineOne);
 
-        Map<String, String> orderLineTwo = OrderFixtures.요청_주문품목_맵_생성(itemTwoId, "S");
+        Map<String, String> orderLineTwo = OrderFixtures.요청_주문품목_맵_생성(itemTwoId, "100000", "S");
         Map<String, Object> orderTwo = OrderFixtures.요청_주문_맵_생성(orderLineTwo);
 
         OrderFixtures.주문하기(customerId, orderOne);
@@ -88,7 +88,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     @DisplayName("Scenario: 고객은 주문을 취소할 수 있다.")
     void cancelOrderTest() {
         // given
-        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");
+        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "130000", "L");
         Map<String, Object> orderOne = OrderFixtures.요청_주문_맵_생성(orderLineOne);
 
         Long orderId = Long.parseLong(String.valueOf(OrderFixtures.주문하기(customerId, orderOne).as(CommonResponse.class).getReturnData()));
@@ -107,7 +107,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     @DisplayName("Scenario: 고객은 NEW 상태인 주문만 취소할 수 있다.")
     void cancelOrderTest_notWithNewOrder() {
         // given
-        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "L");
+        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "130000", "L");
         Map<String, Object> orderOne = OrderFixtures.요청_주문_맵_생성(orderLineOne);
 
         Long orderId = Long.parseLong(String.valueOf(OrderFixtures.주문하기(customerId, orderOne).as(CommonResponse.class).getReturnData()));
