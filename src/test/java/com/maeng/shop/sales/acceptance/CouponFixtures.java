@@ -1,0 +1,34 @@
+package com.maeng.shop.sales.acceptance;
+
+import io.restassured.RestAssured;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
+import org.springframework.http.MediaType;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class CouponFixtures {
+    public static Map<String, String> 요청_쿠폰_맵_생성(String brand, String name, String discountRate, String maxAmount, Long supplierId) {
+        Map<String, String> coupon = new HashMap<>();
+        coupon.put("type", brand);
+        coupon.put("name", name);
+        coupon.put("discountRate", discountRate);
+        coupon.put("maxAmount", maxAmount);
+        coupon.put("supplierId", supplierId+"");
+        return coupon;
+    }
+
+    public static ExtractableResponse<Response> 쿠폰_생성(Map<String, String> coupon) {
+        return RestAssured
+                .given()
+                    .log().all()
+                    .body(coupon)
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .when()
+                    .post("/api/v1/coupons")
+                .then()
+                    .log().all()
+                .extract();
+    }
+}

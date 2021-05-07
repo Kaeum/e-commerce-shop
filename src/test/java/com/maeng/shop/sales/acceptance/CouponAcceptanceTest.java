@@ -2,6 +2,7 @@ package com.maeng.shop.sales.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
 import com.maeng.shop.common.CommonResponse;
+import com.maeng.shop.sales.domain.Coupon;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -33,26 +34,13 @@ public class CouponAcceptanceTest extends AcceptanceTest {
     @DisplayName("Scenario: 쿠폰을 생성한다.")
     void createCoupon() {
         // given
-        Map<String, String> coupon = new HashMap<>();
-        coupon.put("type", "brand");
-        coupon.put("name", "나이키 5% 할인 쿠폰");
-        coupon.put("discountRate", "5");
-        coupon.put("maxAmount", "10000");
-        coupon.put("supplierId", "1");
+        Map<String, String> coupon = CouponFixtures.요청_쿠폰_맵_생성("brand", "나이키 5% 할인 쿠폰", "5", "10000", supplierId);
 
         // when
-        ExtractableResponse<Response> response = RestAssured
-                .given()
-                    .log().all()
-                    .body(coupon)
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                    .post("/api/v1/coupons")
-                .then()
-                    .log().all()
-                .extract();
+        ExtractableResponse<Response> response = CouponFixtures.쿠폰_생성(coupon);
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
     }
+
 }
