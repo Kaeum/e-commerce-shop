@@ -1,11 +1,12 @@
 package com.maeng.shop.sales.controller;
 
 import com.maeng.shop.common.CommonResponse;
+import com.maeng.shop.sales.application.CouponService;
 import com.maeng.shop.sales.application.CustomerService;
 import com.maeng.shop.sales.application.OrderService;
 import com.maeng.shop.sales.dto.OrderResponse;
 import com.maeng.shop.sales.dto.PlaceOrderRequest;
-import com.maeng.shop.sales.dto.SignupRequest;
+import com.maeng.shop.sales.dto.SignUpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,16 +17,21 @@ import java.util.List;
 @RestController
 public class CustomerController {
 
-    private final OrderService orderService;
     private final CustomerService customerService;
+    private final OrderService orderService;
+    private final CouponService couponService;
 
-    public CustomerController(final OrderService orderService, final CustomerService customerService) {
-        this.orderService = orderService;
+    public CustomerController(
+            final CustomerService customerService,
+            final OrderService orderService,
+            final CouponService couponService) {
         this.customerService = customerService;
+        this.orderService = orderService;
+        this.couponService = couponService;
     }
 
     @PostMapping(path = "/api/v1/customers")
-    public ResponseEntity<CommonResponse> signUp(@RequestBody final SignupRequest signupRequest) {
+    public ResponseEntity<CommonResponse> signUp(@RequestBody final SignUpRequest signupRequest) {
         Long customerId = customerService.signUp(signupRequest);
         return ResponseEntity
                 .created(URI.create("/api/v1/customers/" + customerId))
@@ -61,4 +67,5 @@ public class CustomerController {
         orderService.cancelOrder(orderId);
         return new ResponseEntity<>(CommonResponse.onSuccess(), HttpStatus.NO_CONTENT);
     }
+
 }

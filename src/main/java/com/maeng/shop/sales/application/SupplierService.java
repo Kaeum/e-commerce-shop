@@ -27,7 +27,7 @@ public class SupplierService {
 
     @Transactional
     public Long registerSupplier(final RegisterSupplierRequest registerSupplierRequest) {
-        Supplier supplier = new Supplier(registerSupplierRequest);
+        Supplier supplier = registerSupplierRequest.toSupplier();
         supplierRepository.save(supplier);
         return supplier.getId();
     }
@@ -48,14 +48,14 @@ public class SupplierService {
 
     public SupplierResponse getSupplier(Long supplierId) {
         Supplier supplier = supplierRepository.findById(supplierId).orElseThrow(RuntimeException::new);
-        return supplier.toDto();
+        return SupplierResponse.toResponse(supplier);
     }
 
     public List<ItemResponse> getItemsBySupplierId(Long supplierId) {
         List<Item> items = itemRepository.findAllBySupplierId(supplierId);
 
         return items.stream()
-                .map(Item::toItemDto)
+                .map(ItemResponse::toResponse)
                 .collect(Collectors.toList());
     }
 }

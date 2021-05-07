@@ -39,7 +39,23 @@ public class Item extends BaseEntity {
         return id;
     }
 
-    public ItemResponse toItemDto() {
-        return new ItemResponse(id, name, unitPrice, sex, category);
+    public String getName() {
+        return name;
+    }
+
+    public int getUnitPrice() {
+        return unitPrice;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
     }
 }

@@ -1,5 +1,7 @@
 package com.maeng.shop.sales.dto;
 
+import com.maeng.shop.sales.domain.Supplier;
+
 public class SupplierResponse {
     private Long id;
 
@@ -16,5 +18,9 @@ public class SupplierResponse {
 
     public String getCompanyName() {
         return companyName;
+    }
+
+    public static SupplierResponse toResponse(Supplier supplier) {
+        return new SupplierResponse(supplier.getId(), supplier.getCompanyName());
     }
 }

@@ -1,6 +1,7 @@
 package com.maeng.shop.sales.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
+import com.maeng.shop.common.CommonResponse;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -17,11 +18,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Feature: 쿠폰 관련된 기능을 테스트한다.")
 public class CouponAcceptanceTest extends AcceptanceTest {
-    private Long customerId;
+    private Long supplierId;
 
     @BeforeEach
     public void setUp() {
         super.setUp();
+        Map<String, String> supplier = SupplierFixtures.요청_거래처_맵_생성("Nike");
+        supplierId = Long.parseLong(String.valueOf(SupplierFixtures.새로운_거래처_등록(supplier)
+                .as(CommonResponse.class)
+                .getReturnData()));
     }
 
     @Test
@@ -42,7 +47,7 @@ public class CouponAcceptanceTest extends AcceptanceTest {
                     .body(coupon)
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .when()
-                    .post("/customers/" + customerId + "/coupons")
+                    .post("/api/v1/coupons")
                 .then()
                     .log().all()
                 .extract();

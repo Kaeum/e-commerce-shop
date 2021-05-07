@@ -1,6 +1,7 @@
 package com.maeng.shop.sales.dto;
 
 import com.maeng.shop.sales.domain.Category;
+import com.maeng.shop.sales.domain.Item;
 import com.maeng.shop.sales.domain.Sex;
 
 public class ItemResponse {
@@ -40,5 +41,9 @@ public class ItemResponse {
 
     public Category getCategory() {
         return category;
+    }
+
+    public static ItemResponse toResponse(final Item item) {
+        return new ItemResponse(item.getId(), item.getName(), item.getUnitPrice(), item.getSex(), item.getCategory());
     }
 }

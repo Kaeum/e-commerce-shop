@@ -22,15 +22,11 @@ public class Supplier extends BaseEntity {
         this.companyName = companyName;
     }
 
-    public Supplier(RegisterSupplierRequest registerSupplierRequest) {
-        this(registerSupplierRequest.getCompanyName());
-    }
-
     public Long getId() {
         return id;
     }
 
-    public SupplierResponse toDto() {
-        return new SupplierResponse(id, companyName);
+    public String getCompanyName() {
+        return companyName;
     }
 }

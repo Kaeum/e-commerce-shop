@@ -1,7 +1,7 @@
 package com.maeng.shop.sales.application;
 
 import com.maeng.shop.sales.domain.Customer;
-import com.maeng.shop.sales.dto.SignupRequest;
+import com.maeng.shop.sales.dto.SignUpRequest;
 import com.maeng.shop.sales.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,8 +16,8 @@ public class CustomerService {
     }
 
     @Transactional
-    public Long signUp(final SignupRequest signupRequest) {
-        Customer customer = new Customer(signupRequest);
+    public Long signUp(final SignUpRequest signupRequest) {
+        Customer customer = SignUpRequest.toCustomer(signupRequest);
         customerRepository.save(customer);
         return customer.getId();
     }

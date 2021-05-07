@@ -1,7 +1,7 @@
 package com.maeng.shop.sales.domain;
 
 import com.maeng.shop.common.BaseEntity;
-import com.maeng.shop.sales.dto.SignupRequest;
+import com.maeng.shop.sales.dto.SignUpRequest;
 
 import javax.persistence.*;
 
@@ -32,15 +32,6 @@ public class Customer extends BaseEntity {
         this.age = age;
         this.name = name;
         this.memberLevel = memberLevel;
-    }
-
-    public Customer(SignupRequest signupRequest) {
-        this(signupRequest.getEmail()
-                    ,signupRequest.getPassword()
-                    ,signupRequest.getAge()
-                    ,signupRequest.getName()
-                    ,MemberLevel.BRONZE
-        );
     }
 
     public Long getId() {

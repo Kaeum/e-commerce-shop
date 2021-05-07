@@ -16,7 +16,7 @@ public class CustomerCouponMapping {
     @ManyToOne(fetch = FetchType.LAZY)
     private Coupon coupon;
 
-    private boolean useYn;
+    private boolean validYn;
 
     private LocalDateTime expiredAt;
 }
