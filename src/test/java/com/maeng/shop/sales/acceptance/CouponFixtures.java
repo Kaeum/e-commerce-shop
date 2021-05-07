@@ -9,13 +9,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CouponFixtures {
-    public static Map<String, String> 요청_쿠폰_맵_생성(String brand, String name, String discountRate, String maxAmount, Long supplierId) {
+    public static Map<String, String> 요청_브랜드_쿠폰_맵_생성(String brand, String name, String discountRate, String maxAmount, Long supplierId) {
         Map<String, String> coupon = new HashMap<>();
         coupon.put("type", brand);
         coupon.put("name", name);
         coupon.put("discountRate", discountRate);
         coupon.put("maxAmount", maxAmount);
         coupon.put("supplierId", supplierId+"");
+        return coupon;
+    }
+
+    public static Map<String, String> 요청_멤버_쿠폰_맵_생성(String brand, String name, String discountRate, String maxAmount, String memberLevel) {
+        Map<String, String> coupon = new HashMap<>();
+        coupon.put("type", brand);
+        coupon.put("name", name);
+        coupon.put("discountRate", discountRate);
+        coupon.put("maxAmount", maxAmount);
+        coupon.put("memberLevel", memberLevel);
         return coupon;
     }
 
