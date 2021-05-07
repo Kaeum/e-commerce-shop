@@ -4,7 +4,6 @@ import com.maeng.shop.AcceptanceTest;
 import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.sales.domain.OrderState;
 import com.maeng.shop.sales.dto.ItemResponse;
-import com.maeng.shop.sales.dto.OrderResponse;
 import com.maeng.shop.sales.exception.CannotCancelException;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;

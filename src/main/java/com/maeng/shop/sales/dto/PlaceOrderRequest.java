@@ -1,7 +1,5 @@
 package com.maeng.shop.sales.dto;
 
-import com.maeng.shop.sales.domain.Customer;
-
 import java.util.List;
 
 public class PlaceOrderRequest {

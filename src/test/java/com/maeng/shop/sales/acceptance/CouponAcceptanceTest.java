@@ -2,17 +2,13 @@ package com.maeng.shop.sales.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
 import com.maeng.shop.common.CommonResponse;
-import com.maeng.shop.sales.domain.Coupon;
-import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;

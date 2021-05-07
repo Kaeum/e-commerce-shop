@@ -1,6 +1,9 @@
 package com.maeng.shop.sales.domain;
 
-import javax.persistence.*;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue(value = "brand")

@@ -2,7 +2,6 @@ package com.maeng.shop.sales.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
 import com.maeng.shop.common.CommonResponse;
-import com.maeng.shop.sales.domain.Customer;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;

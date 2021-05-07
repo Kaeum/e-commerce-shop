@@ -1,7 +1,6 @@
 package com.maeng.shop.sales.domain;
 
 import com.maeng.shop.common.BaseEntity;
-import com.maeng.shop.sales.dto.SignUpRequest;
 
 import javax.persistence.*;
 
