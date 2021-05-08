@@ -55,9 +55,23 @@ public class CouponAcceptanceTest extends AcceptanceTest {
 
     @Test
     @DisplayName("Scenario: 유저에게 회원등급 쿠폰을 지급한다.")
-    void issueCoupon() {
+    void issueCoupon_MemberLevelCoupon() {
         // given
-        Map<String, String> coupon = CouponFixtures.요청_멤버_쿠폰_맵_생성("member", "나이키 5% 할인 쿠폰", "5", "10000", "BRONZE");
+        Map<String, String> coupon = CouponFixtures.요청_멤버_쿠폰_맵_생성("member", "브론즈 회원 5% 할인 쿠폰", "5", "10000", "BRONZE");
+        Long couponId = Long.parseLong(String.valueOf(CouponFixtures.쿠폰_생성(coupon).as(CommonResponse.class).getReturnData()));
+
+        // when
+        ExtractableResponse<Response> response = CouponFixtures.쿠폰_발급(coupon, customerId, couponId);
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+    }
+
+    @Test
+    @DisplayName("Scenario: 유저에게 브랜드 쿠폰을 지급한다.")
+    void issueCoupon_BrandCoupon() {
+        // given
+        Map<String, String> coupon = CouponFixtures.요청_브랜드_쿠폰_맵_생성("brand", "나이키 5% 할인 쿠폰", "5", "10000", supplierId);
         Long couponId = Long.parseLong(String.valueOf(CouponFixtures.쿠폰_생성(coupon).as(CommonResponse.class).getReturnData()));
 
         // when
