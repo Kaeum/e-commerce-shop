@@ -1,6 +1,7 @@
 package com.maeng.shop.sales.domain;
 
 import com.maeng.shop.common.BaseEntity;
+import com.maeng.shop.sales.exception.InappropriateMemberLevelException;
 
 import javax.persistence.*;
 
@@ -43,5 +44,15 @@ public abstract class Coupon extends BaseEntity {
 
     public int getMaxAmount() {
         return maxAmount;
+    }
+
+    public void checkMemberLevel(MemberLevel memberLevel) {
+        if(this instanceof BrandCoupon) {
+            return;
+        }
+
+        if(!memberLevel.equals(((MemberLevelCoupon) this).getMemberLevel())) {
+            throw new InappropriateMemberLevelException();
+        }
     }
 }

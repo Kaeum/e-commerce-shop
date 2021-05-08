@@ -1,5 +1,6 @@
 package com.maeng.shop.sales.domain;
 
+import com.maeng.shop.sales.exception.InappropriateMemberLevelException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -16,6 +17,6 @@ public class CouponTest {
         // then
         assertThatThrownBy(() -> {
             coupon.checkMemberLevel(MemberLevel.BRONZE);
-        }).isInstanceOf(InappropriateCouponLevelException.class);
+        }).isInstanceOf(InappropriateMemberLevelException.class);
     }
 }

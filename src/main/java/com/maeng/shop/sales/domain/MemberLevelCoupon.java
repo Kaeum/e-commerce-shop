@@ -23,4 +23,8 @@ public class MemberLevelCoupon extends Coupon{
         super(name, discountRate, maxAmount);
         this.memberLevel = memberLevel;
     }
+
+    public MemberLevel getMemberLevel() {
+        return memberLevel;
+    }
 }

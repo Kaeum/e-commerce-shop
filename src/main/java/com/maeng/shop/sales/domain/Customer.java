@@ -48,4 +48,8 @@ public class Customer extends BaseEntity {
     public String getName() {
         return name;
     }
+
+    public MemberLevel getMemberLevel() {
+        return memberLevel;
+    }
 }

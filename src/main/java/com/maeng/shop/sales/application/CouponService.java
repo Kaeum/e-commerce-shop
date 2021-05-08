@@ -53,6 +53,8 @@ public class CouponService {
         Customer customer = customerService.getCustomer(customerId);
         Coupon coupon = couponRepository.findById(couponId).orElseThrow(NoCouponException::new);
 
+        coupon.checkMemberLevel(customer.getMemberLevel());
+
         CustomerCouponMapping customerCouponMapping = new CustomerCouponMapping(customer, coupon);
         customerCouponRepository.save(customerCouponMapping);
     }
