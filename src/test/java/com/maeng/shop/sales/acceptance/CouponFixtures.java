@@ -41,4 +41,10 @@ public class CouponFixtures {
                     .log().all()
                 .extract();
     }
+
+    public static ExtractableResponse<Response> 쿠폰_발급(Map<String, String> coupon, Long customerId, Long couponId) {
+        return RestAssured.given().log().all().contentType(MediaType.APPLICATION_JSON_VALUE).body(coupon)
+                .when().post("/api/v1/customers/" + customerId + "/coupons/" + couponId)
+                .then().log().all().extract();
+    }
 }

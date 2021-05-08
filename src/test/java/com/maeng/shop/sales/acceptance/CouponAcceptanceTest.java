@@ -61,13 +61,24 @@ public class CouponAcceptanceTest extends AcceptanceTest {
         Long couponId = Long.parseLong(String.valueOf(CouponFixtures.쿠폰_생성(coupon).as(CommonResponse.class).getReturnData()));
 
         // when
-        ExtractableResponse<Response> response = RestAssured.given().log().all().contentType(MediaType.APPLICATION_JSON_VALUE).body(coupon)
-                .when().post("/api/v1/customers/" + customerId + "/coupons/" + couponId)
-                .then().log().all().extract();
+        ExtractableResponse<Response> response = CouponFixtures.쿠폰_발급(coupon, customerId, couponId);
 
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+    }
 
+    @Test
+    @DisplayName("Scenario: 유저의 등급에 맞지않는 회원등급 쿠폰을 지급하면 실패한다.")
+    void issueCoupon_withInappropriateCoupon() {
+        // given
+        Map<String, String> coupon = CouponFixtures.요청_멤버_쿠폰_맵_생성("member", "나이키 5% 할인 쿠폰", "7", "15000", "SILVER");
+        Long couponId = Long.parseLong(String.valueOf(CouponFixtures.쿠폰_생성(coupon).as(CommonResponse.class).getReturnData()));
+
+        // when
+        ExtractableResponse<Response> response = CouponFixtures.쿠폰_발급(coupon, customerId, couponId);
+
+        // then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
 }

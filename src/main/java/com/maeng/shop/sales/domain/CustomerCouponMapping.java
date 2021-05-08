@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 @Table(name = "customer_coupon_mappings")
 public class CustomerCouponMapping extends BaseEntity {
 
+    private static final String VALID_YN_Y = "Y";
+    private static final int DEFAULT_EXPIRE_DURATION = 1;
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -27,7 +30,7 @@ public class CustomerCouponMapping extends BaseEntity {
     public CustomerCouponMapping(Customer customer, Coupon coupon) {
         this.customer = customer;
         this.coupon = coupon;
-        this.validYn = "Y";
-        this.expiredAt = LocalDateTime.now().plusMonths(1);
+        this.validYn = VALID_YN_Y;
+        this.expiredAt = LocalDateTime.now().plusMonths(DEFAULT_EXPIRE_DURATION);
     }
 }
