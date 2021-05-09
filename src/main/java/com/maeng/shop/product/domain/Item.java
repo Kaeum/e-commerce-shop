@@ -2,6 +2,7 @@ package com.maeng.shop.product.domain;
 
 import com.maeng.shop.common.BaseEntity;
 import com.maeng.shop.customer.domain.Sex;
+import com.maeng.shop.discount.domain.DiscountPolicy;
 import com.maeng.shop.supplier.domain.Supplier;
 
 import javax.persistence.*;
@@ -25,6 +26,9 @@ public class Item extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Supplier supplier;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private DiscountPolicy discountPolicy;
 
     public Item() {}
 

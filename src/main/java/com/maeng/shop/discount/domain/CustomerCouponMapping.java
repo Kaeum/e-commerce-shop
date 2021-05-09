@@ -24,7 +24,7 @@ public class CustomerCouponMapping extends BaseEntity {
 
     private String validYn;
 
-    private LocalDateTime expiredAt;
+    private LocalDateTime expiresAt;
 
     protected CustomerCouponMapping() {}
 
@@ -32,6 +32,6 @@ public class CustomerCouponMapping extends BaseEntity {
         this.customer = customer;
         this.coupon = coupon;
         this.validYn = VALID_YN_Y;
-        this.expiredAt = LocalDateTime.now().plusMonths(DEFAULT_EXPIRE_DURATION);
+        this.expiresAt = LocalDateTime.now().plusMonths(DEFAULT_EXPIRE_DURATION);
     }
 }
