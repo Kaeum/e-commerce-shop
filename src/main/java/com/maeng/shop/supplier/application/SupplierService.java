@@ -1,12 +1,12 @@
 package com.maeng.shop.supplier.application;
 
 import com.maeng.shop.product.domain.Item;
-import com.maeng.shop.supplier.domain.Supplier;
 import com.maeng.shop.product.dto.ItemResponse;
 import com.maeng.shop.product.dto.RegisterItemRequest;
+import com.maeng.shop.product.repository.ItemRepository;
+import com.maeng.shop.supplier.domain.Supplier;
 import com.maeng.shop.supplier.dto.RegisterSupplierRequest;
 import com.maeng.shop.supplier.dto.SupplierResponse;
-import com.maeng.shop.product.repository.ItemRepository;
 import com.maeng.shop.supplier.repository.SupplierRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

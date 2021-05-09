@@ -1,7 +1,5 @@
 package com.maeng.shop.order.dto;
 
-import com.maeng.shop.order.dto.OrderLineRequest;
-
 import java.util.List;
 
 public class PlaceOrderRequest {

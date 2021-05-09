@@ -1,8 +1,8 @@
 package com.maeng.shop.order.dto;
 
+import com.maeng.shop.customer.dto.CustomerResponse;
 import com.maeng.shop.order.domain.Order;
 import com.maeng.shop.order.domain.OrderState;
-import com.maeng.shop.customer.dto.CustomerResponse;
 
 public class OrderResponse {
 

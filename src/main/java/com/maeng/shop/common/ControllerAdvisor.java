@@ -1,6 +1,5 @@
 package com.maeng.shop.common;
 
-import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.order.exception.CannotCancelException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

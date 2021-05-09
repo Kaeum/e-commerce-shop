@@ -1,8 +1,8 @@
 package com.maeng.shop.product.dto;
 
+import com.maeng.shop.customer.domain.Sex;
 import com.maeng.shop.product.domain.Category;
 import com.maeng.shop.product.domain.Item;
-import com.maeng.shop.customer.domain.Sex;
 
 public class ItemResponse {
     private Long id;

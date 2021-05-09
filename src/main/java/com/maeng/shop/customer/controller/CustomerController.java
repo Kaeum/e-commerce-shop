@@ -1,12 +1,12 @@
 package com.maeng.shop.customer.controller;
 
 import com.maeng.shop.common.CommonResponse;
-import com.maeng.shop.discount.application.CouponService;
 import com.maeng.shop.customer.application.CustomerService;
+import com.maeng.shop.customer.dto.SignUpRequest;
+import com.maeng.shop.discount.application.CouponService;
 import com.maeng.shop.order.application.OrderService;
 import com.maeng.shop.order.dto.OrderResponse;
 import com.maeng.shop.order.dto.PlaceOrderRequest;
-import com.maeng.shop.customer.dto.SignUpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -2,15 +2,15 @@ package com.maeng.shop.order.application;
 
 import com.maeng.shop.customer.application.CustomerService;
 import com.maeng.shop.customer.domain.Customer;
-import com.maeng.shop.product.domain.Item;
 import com.maeng.shop.order.domain.Order;
 import com.maeng.shop.order.domain.OrderLine;
 import com.maeng.shop.order.dto.OrderLineRequest;
 import com.maeng.shop.order.dto.OrderResponse;
 import com.maeng.shop.order.dto.PlaceOrderRequest;
-import com.maeng.shop.product.repository.ItemRepository;
 import com.maeng.shop.order.repository.OrderLineRepository;
 import com.maeng.shop.order.repository.OrderRepository;
+import com.maeng.shop.product.domain.Item;
+import com.maeng.shop.product.repository.ItemRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

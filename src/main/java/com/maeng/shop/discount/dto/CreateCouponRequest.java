@@ -1,7 +1,7 @@
 package com.maeng.shop.discount.dto;
 
-import com.maeng.shop.discount.domain.BrandCoupon;
 import com.maeng.shop.customer.domain.MemberLevel;
+import com.maeng.shop.discount.domain.BrandCoupon;
 import com.maeng.shop.discount.domain.MemberLevelCoupon;
 import com.maeng.shop.supplier.domain.Supplier;
 

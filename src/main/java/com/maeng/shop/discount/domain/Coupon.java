@@ -1,8 +1,8 @@
 package com.maeng.shop.discount.domain;
 
 import com.maeng.shop.common.BaseEntity;
-import com.maeng.shop.discount.exception.InappropriateMemberLevelException;
 import com.maeng.shop.customer.domain.MemberLevel;
+import com.maeng.shop.discount.exception.InappropriateMemberLevelException;
 
 import javax.persistence.*;
 
