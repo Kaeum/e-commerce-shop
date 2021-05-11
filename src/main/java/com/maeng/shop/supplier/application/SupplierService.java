@@ -1,9 +1,9 @@
 package com.maeng.shop.supplier.application;
 
-import com.maeng.shop.product.domain.Item;
-import com.maeng.shop.product.dto.ItemResponse;
-import com.maeng.shop.product.dto.RegisterItemRequest;
-import com.maeng.shop.product.repository.ItemRepository;
+import com.maeng.shop.product.domain.Product;
+import com.maeng.shop.product.dto.ProductResponse;
+import com.maeng.shop.product.dto.RegisterProductRequest;
+import com.maeng.shop.product.repository.ProductRepository;
 import com.maeng.shop.supplier.domain.Supplier;
 import com.maeng.shop.supplier.dto.RegisterSupplierRequest;
 import com.maeng.shop.supplier.dto.SupplierResponse;
@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class SupplierService {
     private final SupplierRepository supplierRepository;
-    private final ItemRepository itemRepository;
+    private final ProductRepository productRepository;
 
-    public SupplierService(final SupplierRepository supplierRepository, ItemRepository itemRepository) {
+    public SupplierService(final SupplierRepository supplierRepository, ProductRepository productRepository) {
         this.supplierRepository = supplierRepository;
-        this.itemRepository = itemRepository;
+        this.productRepository = productRepository;
     }
 
     @Transactional
@@ -33,17 +33,17 @@ public class SupplierService {
     }
 
     @Transactional
-    public Long registerItem(final RegisterItemRequest registerItemRequest, final Long supplierId) {
+    public Long registerItem(final RegisterProductRequest registerProductRequest, final Long supplierId) {
         Supplier supplier = supplierRepository.findById(supplierId).orElseThrow(RuntimeException::new);
 
-        Item item = new Item(registerItemRequest.getName(),
-                registerItemRequest.getUnitPrice(),
-                registerItemRequest.getSex(),
-                registerItemRequest.getCategory(),
+        Product product = new Product(registerProductRequest.getName(),
+                registerProductRequest.getUnitPrice(),
+                registerProductRequest.getSex(),
+                registerProductRequest.getCategory(),
                 supplier);
 
-        itemRepository.save(item);
-        return item.getId();
+        productRepository.save(product);
+        return product.getId();
     }
 
     public SupplierResponse getSupplier(Long supplierId) {
@@ -51,11 +51,11 @@ public class SupplierService {
         return SupplierResponse.toResponse(supplier);
     }
 
-    public List<ItemResponse> getItemsBySupplierId(Long supplierId) {
-        List<Item> items = itemRepository.findAllBySupplierId(supplierId);
+    public List<ProductResponse> getItemsBySupplierId(Long supplierId) {
+        List<Product> products = productRepository.findAllBySupplierId(supplierId);
 
-        return items.stream()
-                .map(ItemResponse::toResponse)
+        return products.stream()
+                .map(ProductResponse::toResponse)
                 .collect(Collectors.toList());
     }
 }

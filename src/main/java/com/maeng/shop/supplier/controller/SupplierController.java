@@ -1,8 +1,8 @@
 package com.maeng.shop.supplier.controller;
 
 import com.maeng.shop.common.CommonResponse;
-import com.maeng.shop.product.dto.ItemResponse;
-import com.maeng.shop.product.dto.RegisterItemRequest;
+import com.maeng.shop.product.dto.ProductResponse;
+import com.maeng.shop.product.dto.RegisterProductRequest;
 import com.maeng.shop.supplier.application.SupplierService;
 import com.maeng.shop.supplier.dto.RegisterSupplierRequest;
 import com.maeng.shop.supplier.dto.SupplierResponse;
@@ -36,16 +36,16 @@ public class SupplierController {
     @PostMapping(path = "/api/v1/suppliers/{supplierId}/items")
     public ResponseEntity<CommonResponse> registerItem(
             @PathVariable final Long supplierId,
-            @RequestBody final RegisterItemRequest registerItemRequest
+            @RequestBody final RegisterProductRequest registerProductRequest
     ) {
-        Long itemId = supplierService.registerItem(registerItemRequest, supplierId);
+        Long itemId = supplierService.registerItem(registerProductRequest, supplierId);
         return ResponseEntity.created(URI.create("/api/v1/suppliers/"+supplierId+"/items/"+itemId))
                 .body(CommonResponse.onSuccess(itemId));
     }
 
     @GetMapping(path = "/api/v1/suppliers/{supplierId}/items")
     public ResponseEntity<CommonResponse> getItemsBySupplierId(@PathVariable final Long supplierId) {
-        List<ItemResponse> items = supplierService.getItemsBySupplierId(supplierId);
+        List<ProductResponse> items = supplierService.getItemsBySupplierId(supplierId);
         return ResponseEntity.ok(CommonResponse.onSuccess(items));
     }
 }

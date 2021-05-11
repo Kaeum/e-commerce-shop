@@ -9,8 +9,8 @@ import com.maeng.shop.order.dto.OrderResponse;
 import com.maeng.shop.order.dto.PlaceOrderRequest;
 import com.maeng.shop.order.repository.OrderLineRepository;
 import com.maeng.shop.order.repository.OrderRepository;
-import com.maeng.shop.product.domain.Item;
-import com.maeng.shop.product.repository.ItemRepository;
+import com.maeng.shop.product.domain.Product;
+import com.maeng.shop.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,13 +24,13 @@ public class OrderService {
     private final CustomerService customerService;
     private final OrderRepository orderRepository;
     private final OrderLineRepository orderLineRepository;
-    private final ItemRepository itemRepository;
+    private final ProductRepository productRepository;
 
-    public OrderService(CustomerService customerService, OrderRepository orderRepository, OrderLineRepository orderLineRepository, OrderLineRepository orderLineRepository1, ItemRepository itemRepository) {
+    public OrderService(CustomerService customerService, OrderRepository orderRepository, OrderLineRepository orderLineRepository, OrderLineRepository orderLineRepository1, ProductRepository productRepository) {
         this.customerService = customerService;
         this.orderRepository = orderRepository;
         this.orderLineRepository = orderLineRepository1;
-        this.itemRepository = itemRepository;
+        this.productRepository = productRepository;
     }
 
     public List<OrderResponse> getOrders(Long customerId) {
@@ -59,13 +59,13 @@ public class OrderService {
             .map(OrderLineRequest::getItemId)
             .collect(Collectors.toList());
 
-        List<Item> items = itemRepository.findByIdIn(itemIds);
+        List<Product> products = productRepository.findByIdIn(itemIds);
 
-        IntStream.range(0, items.size()).forEach(i -> {
-            Item item = items.get(i);
+        IntStream.range(0, products.size()).forEach(i -> {
+            Product product = products.get(i);
             String size = sizes.get(i);
             int orderPrice = orderPrices.get(i);
-            orderLineRepository.save(OrderLine.createOrderLine(item, size, orderPrice, order));
+            orderLineRepository.save(OrderLine.createOrderLine(product, size, orderPrice, order));
         });
 
         return order.getId();

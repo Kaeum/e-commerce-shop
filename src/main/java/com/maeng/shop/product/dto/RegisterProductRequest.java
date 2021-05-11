@@ -3,7 +3,7 @@ package com.maeng.shop.product.dto;
 import com.maeng.shop.customer.domain.Sex;
 import com.maeng.shop.product.domain.Category;
 
-public class RegisterItemRequest {
+public class RegisterProductRequest {
     private String name;
     private int unitPrice;
     private Sex sex;

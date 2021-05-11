@@ -8,8 +8,8 @@ import com.maeng.shop.supplier.domain.Supplier;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "items")
-public class Item extends BaseEntity {
+@Table(name = "products")
+public class Product extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,9 +30,9 @@ public class Item extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     private DiscountPolicy discountPolicy;
 
-    public Item() {}
+    public Product() {}
 
-    public Item(String name, int unitPrice, Sex sex, Category category, Supplier supplier) {
+    public Product(String name, int unitPrice, Sex sex, Category category, Supplier supplier) {
         this.name = name;
         this.unitPrice = unitPrice;
         this.sex = sex;

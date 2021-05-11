@@ -5,7 +5,7 @@ import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.customer.acceptance.CustomerFixtures;
 import com.maeng.shop.order.domain.OrderState;
 import com.maeng.shop.order.exception.CannotCancelException;
-import com.maeng.shop.product.dto.ItemResponse;
+import com.maeng.shop.product.dto.ProductResponse;
 import com.maeng.shop.supplier.acceptance.SupplierFixtures;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -80,7 +80,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
 
-        List<ItemResponse> items = (List<ItemResponse>) response.body().as(CommonResponse.class).getReturnData();
+        List<ProductResponse> items = (List<ProductResponse>) response.body().as(CommonResponse.class).getReturnData();
         assertThat(items.size()).isEqualTo(2);
 
     }

@@ -2,9 +2,9 @@ package com.maeng.shop.product.dto;
 
 import com.maeng.shop.customer.domain.Sex;
 import com.maeng.shop.product.domain.Category;
-import com.maeng.shop.product.domain.Item;
+import com.maeng.shop.product.domain.Product;
 
-public class ItemResponse {
+public class ProductResponse {
     private Long id;
 
     private String name;
@@ -15,7 +15,7 @@ public class ItemResponse {
 
     private Category category;
 
-    public ItemResponse(Long id, String name, int unitPrice, Sex sex, Category category) {
+    public ProductResponse(Long id, String name, int unitPrice, Sex sex, Category category) {
         this.id = id;
         this.name = name;
         this.unitPrice = unitPrice;
@@ -43,7 +43,7 @@ public class ItemResponse {
         return category;
     }
 
-    public static ItemResponse toResponse(final Item item) {
-        return new ItemResponse(item.getId(), item.getName(), item.getUnitPrice(), item.getSex(), item.getCategory());
+    public static ProductResponse toResponse(final Product product) {
+        return new ProductResponse(product.getId(), product.getName(), product.getUnitPrice(), product.getSex(), product.getCategory());
     }
 }

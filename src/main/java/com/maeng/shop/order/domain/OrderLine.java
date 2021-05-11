@@ -1,7 +1,7 @@
 package com.maeng.shop.order.domain;
 
 import com.maeng.shop.common.BaseEntity;
-import com.maeng.shop.product.domain.Item;
+import com.maeng.shop.product.domain.Product;
 
 import javax.persistence.*;
 
@@ -13,7 +13,7 @@ public class OrderLine extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Item item;
+    private Product product;
 
     private String size;
 
@@ -24,23 +24,23 @@ public class OrderLine extends BaseEntity {
 
     protected OrderLine() {}
 
-    public OrderLine(Item item, String size, int orderPrice, Order order) {
-        this.item = item;
+    public OrderLine(Product product, String size, int orderPrice, Order order) {
+        this.product = product;
         this.size = size;
         this.orderPrice = orderPrice;
         this.order = order;
     }
 
-    public static OrderLine createOrderLine(Item item, String size, int orderPrice, Order order) {
-        return new OrderLine(item, size, orderPrice, order);
+    public static OrderLine createOrderLine(Product product, String size, int orderPrice, Order order) {
+        return new OrderLine(product, size, orderPrice, order);
     }
 
     public Long getId() {
         return id;
     }
 
-    public Item getItem() {
-        return item;
+    public Product getProduct() {
+        return product;
     }
 
     public String getSize() {
