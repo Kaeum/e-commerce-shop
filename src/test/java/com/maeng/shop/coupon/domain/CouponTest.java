@@ -22,4 +22,5 @@ public class CouponTest {
             coupon.checkMemberLevel(MemberLevel.BRONZE);
         }).isInstanceOf(InappropriateMemberLevelException.class);
     }
+
 }

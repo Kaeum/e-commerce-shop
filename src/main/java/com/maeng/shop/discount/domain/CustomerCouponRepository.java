@@ -1,4 +1,4 @@
-package com.maeng.shop.discount.repository;
+package com.maeng.shop.discount.domain;
 
 import com.maeng.shop.discount.domain.CustomerCouponMapping;
 import org.springframework.data.jpa.repository.JpaRepository;

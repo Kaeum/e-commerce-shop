@@ -7,10 +7,10 @@ import com.maeng.shop.order.domain.OrderLine;
 import com.maeng.shop.order.dto.OrderLineRequest;
 import com.maeng.shop.order.dto.OrderResponse;
 import com.maeng.shop.order.dto.PlaceOrderRequest;
-import com.maeng.shop.order.repository.OrderLineRepository;
-import com.maeng.shop.order.repository.OrderRepository;
+import com.maeng.shop.order.domain.OrderLineRepository;
+import com.maeng.shop.order.domain.OrderRepository;
 import com.maeng.shop.product.domain.Product;
-import com.maeng.shop.product.repository.ProductRepository;
+import com.maeng.shop.product.domain.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -3,11 +3,11 @@ package com.maeng.shop.supplier.application;
 import com.maeng.shop.product.domain.Product;
 import com.maeng.shop.product.dto.ProductResponse;
 import com.maeng.shop.product.dto.RegisterProductRequest;
-import com.maeng.shop.product.repository.ProductRepository;
+import com.maeng.shop.product.domain.ProductRepository;
 import com.maeng.shop.supplier.domain.Supplier;
 import com.maeng.shop.supplier.dto.RegisterSupplierRequest;
 import com.maeng.shop.supplier.dto.SupplierResponse;
-import com.maeng.shop.supplier.repository.SupplierRepository;
+import com.maeng.shop.supplier.domain.SupplierRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

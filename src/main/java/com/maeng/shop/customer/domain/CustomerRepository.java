@@ -1,4 +1,4 @@
-package com.maeng.shop.customer.repository;
+package com.maeng.shop.customer.domain;
 
 import com.maeng.shop.customer.domain.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;

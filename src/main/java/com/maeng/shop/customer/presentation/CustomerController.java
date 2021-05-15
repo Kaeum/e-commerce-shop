@@ -1,4 +1,4 @@
-package com.maeng.shop.customer.controller;
+package com.maeng.shop.customer.presentation;
 
 import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.customer.application.CustomerService;

@@ -1,4 +1,4 @@
-package com.maeng.shop.supplier.controller;
+package com.maeng.shop.supplier.presentation;
 
 import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.product.dto.ProductResponse;

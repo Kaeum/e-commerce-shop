@@ -1,4 +1,4 @@
-package com.maeng.shop.product.repository;
+package com.maeng.shop.product.domain;
 
 import com.maeng.shop.product.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;

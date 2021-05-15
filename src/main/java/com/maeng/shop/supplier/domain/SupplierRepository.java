@@ -1,4 +1,4 @@
-package com.maeng.shop.supplier.repository;
+package com.maeng.shop.supplier.domain;
 
 import com.maeng.shop.supplier.domain.Supplier;
 import org.springframework.data.jpa.repository.JpaRepository;

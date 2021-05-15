@@ -1,4 +1,4 @@
-package com.maeng.shop.discount.controller;
+package com.maeng.shop.discount.presentation;
 
 import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.discount.application.CouponService;
