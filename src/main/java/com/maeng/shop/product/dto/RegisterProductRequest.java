@@ -1,7 +1,7 @@
 package com.maeng.shop.product.dto;
 
-import com.maeng.shop.customer.domain.Sex;
 import com.maeng.shop.product.domain.Category;
+import com.maeng.shop.product.domain.Sex;
 
 public class RegisterProductRequest {
     private String name;

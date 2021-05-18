@@ -1,8 +1,8 @@
 package com.maeng.shop.customer.application;
 
 import com.maeng.shop.customer.domain.Customer;
-import com.maeng.shop.customer.dto.SignUpRequest;
 import com.maeng.shop.customer.domain.CustomerRepository;
+import com.maeng.shop.customer.dto.SignUpRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

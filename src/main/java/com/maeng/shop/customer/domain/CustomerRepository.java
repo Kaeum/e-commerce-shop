@@ -1,6 +1,5 @@
 package com.maeng.shop.customer.domain;
 
-import com.maeng.shop.customer.domain.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

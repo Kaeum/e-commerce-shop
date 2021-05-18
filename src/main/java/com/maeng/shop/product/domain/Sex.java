@@ -1,4 +1,4 @@
-package com.maeng.shop.customer.domain;
+package com.maeng.shop.product.domain;
 
 public enum Sex {
     MAN,

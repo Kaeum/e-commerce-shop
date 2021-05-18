@@ -1,6 +1,6 @@
 package com.maeng.shop.supplier.domain;
 
-import com.maeng.shop.customer.domain.Sex;
+import com.maeng.shop.product.domain.Sex;
 import com.maeng.shop.product.domain.Category;
 import com.maeng.shop.product.domain.Product;
 import org.junit.jupiter.api.Test;
