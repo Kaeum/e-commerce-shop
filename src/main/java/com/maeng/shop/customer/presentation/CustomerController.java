@@ -3,31 +3,21 @@ package com.maeng.shop.customer.presentation;
 import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.customer.application.CustomerService;
 import com.maeng.shop.customer.dto.SignUpRequest;
-import com.maeng.shop.discount.application.CouponService;
-import com.maeng.shop.order.application.OrderService;
-import com.maeng.shop.order.dto.OrderResponse;
-import com.maeng.shop.order.dto.PlaceOrderRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 public class CustomerController {
 
     private final CustomerService customerService;
-    private final OrderService orderService;
-    private final CouponService couponService;
 
     public CustomerController(
-            final CustomerService customerService,
-            final OrderService orderService,
-            final CouponService couponService) {
+            final CustomerService customerService) {
         this.customerService = customerService;
-        this.orderService = orderService;
-        this.couponService = couponService;
     }
 
     @PostMapping(path = "/api/v1/customers")
@@ -38,34 +28,6 @@ public class CustomerController {
                 .body(CommonResponse.onSuccess(customerId));
     }
 
-    @PostMapping(path = "/api/v1/customers/{customerId}/orders")
-    public ResponseEntity<CommonResponse> placeOrder(
-            @PathVariable final Long customerId,
-            @RequestBody final PlaceOrderRequest placeOrderRequest)
-    {
-        Long orderId = orderService.placeOrder(customerId, placeOrderRequest);
-        return ResponseEntity.created(URI.create("/api/v1/customers/"+customerId+"/orders/"+orderId))
-                .body(CommonResponse.onSuccess(orderId));
-    }
 
-    @GetMapping(path = "/api/v1/customers/{customerId}/orders/{orderId}")
-    public ResponseEntity<CommonResponse<OrderResponse>> getOrder(@PathVariable final Long orderId) {
-        OrderResponse orderResponse = orderService.getOrder(orderId);
-        return ResponseEntity.ok(CommonResponse.onSuccess(orderResponse));
-    }
-
-    @GetMapping(path = "/api/v1/customers/{customerId}/orders")
-    public ResponseEntity<CommonResponse> getOrders(@PathVariable final Long customerId) {
-        List<OrderResponse> orderResponses = orderService.getOrders(customerId);
-        return ResponseEntity.ok(CommonResponse.onSuccess(orderResponses));
-    }
-
-    @DeleteMapping(path = "/api/v1/customers/{customerId}/orders/{orderId}")
-    public ResponseEntity<CommonResponse> cancelOrder(
-        @PathVariable final Long orderId
-    ) {
-        orderService.cancelOrder(orderId);
-        return new ResponseEntity<>(CommonResponse.onSuccess(), HttpStatus.NO_CONTENT);
-    }
 
 }
