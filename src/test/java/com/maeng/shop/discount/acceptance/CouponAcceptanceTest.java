@@ -1,4 +1,4 @@
-package com.maeng.shop.coupon.acceptance;
+package com.maeng.shop.discount.acceptance;
 
 import com.maeng.shop.AcceptanceTest;
 import com.maeng.shop.common.CommonResponse;
@@ -82,7 +82,7 @@ public class CouponAcceptanceTest extends AcceptanceTest {
     }
 
     @Test
-    @DisplayName("Scenario: 유저의 등급에 맞지않는 회원등급 쿠폰을 지급하면 실패한다.")
+    @DisplayName("Scenario: 유저의 등급에 맞지 않는 회원등급 쿠폰을 지급하면 실패한다.")
     void issueCoupon_withInappropriateCoupon() {
         // given
         Map<String, String> coupon = CouponFixtures.요청_멤버_쿠폰_맵_생성("member", "나이키 5% 할인 쿠폰", "7", "15000", "SILVER");

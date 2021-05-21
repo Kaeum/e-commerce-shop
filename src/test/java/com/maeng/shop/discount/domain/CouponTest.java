@@ -1,8 +1,6 @@
-package com.maeng.shop.coupon.domain;
+package com.maeng.shop.discount.domain;
 
 import com.maeng.shop.customer.domain.MemberLevel;
-import com.maeng.shop.discount.domain.Coupon;
-import com.maeng.shop.discount.domain.MemberLevelCoupon;
 import com.maeng.shop.discount.exception.InappropriateMemberLevelException;
 import org.junit.jupiter.api.Test;
 

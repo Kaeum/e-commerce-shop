@@ -1,4 +1,4 @@
-package com.maeng.shop.coupon.acceptance;
+package com.maeng.shop.discount.acceptance;
 
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
