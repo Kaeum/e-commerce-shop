@@ -4,8 +4,8 @@ import com.maeng.shop.AcceptanceTest;
 import com.maeng.shop.common.CommonResponse;
 import com.maeng.shop.customer.acceptance.CustomerFixtures;
 import com.maeng.shop.order.domain.OrderState;
+import com.maeng.shop.order.dto.OrderResponse;
 import com.maeng.shop.order.exception.CannotCancelException;
-import com.maeng.shop.product.dto.ProductResponse;
 import com.maeng.shop.supplier.acceptance.SupplierFixtures;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -23,8 +23,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Feature: 주문과 관련된 기능을 관리한다.")
 public class OrderAcceptanceTest extends AcceptanceTest {
     private Long customerId;
-    private Long itemOneId;
-    private Long itemTwoId;
+    private Long productOneId;
+    private Long productTwoId;
 
     @BeforeEach
     public void setUp() {
@@ -36,19 +36,19 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         Map<String, String> supplier = SupplierFixtures.요청_거래처_맵_생성("Nike");
         Long supplierId = Long.parseLong(String.valueOf(SupplierFixtures.새로운_거래처_등록(supplier).as(CommonResponse.class).getReturnData()));
 
-        Map<String, String> itemOne = 요청_아이템_맵_생성("Nike Air Force 1 '07", "130000", "MAN", "SHOES");
-        Map<String, String> itemTwo = 요청_아이템_맵_생성("Nike NRG Hoody", "100000", "MAN", "CLOTHES");
+        Map<String, String> productOne = 요청_아이템_맵_생성("Nike Air Force 1 '07", "130000", "MAN", "SHOES");
+        Map<String, String> productTwo = 요청_아이템_맵_생성("Nike NRG Hoody", "100000", "MAN", "CLOTHES");
 
-        itemOneId = Long.parseLong(String.valueOf(SupplierFixtures.새로운_아이템_등록(supplierId, itemOne).as(CommonResponse.class).getReturnData()));
-        itemTwoId = Long.parseLong(String.valueOf(SupplierFixtures.새로운_아이템_등록(supplierId, itemTwo).as(CommonResponse.class).getReturnData()));
+        productOneId = Long.parseLong(String.valueOf(SupplierFixtures.새로운_아이템_등록(supplierId, productOne).as(CommonResponse.class).getReturnData()));
+        productTwoId = Long.parseLong(String.valueOf(SupplierFixtures.새로운_아이템_등록(supplierId, productTwo).as(CommonResponse.class).getReturnData()));
     }
 
     @Test
     @DisplayName("Scenario: 고객은 등록된 품목들을 주문할 수 있다.")
     void placeOrderTest() {
         // given
-        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "130000","L");
-        Map<String, String> orderLineTwo = OrderFixtures.요청_주문품목_맵_생성(itemTwoId, "100000","S");
+        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(productOneId, "130000","L");
+        Map<String, String> orderLineTwo = OrderFixtures.요청_주문품목_맵_생성(productTwoId, "100000","S");
         Map<String, Object> order = OrderFixtures.요청_주문_맵_생성(orderLineOne, orderLineTwo);
 
         // when
@@ -65,10 +65,10 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     @DisplayName("Scenario: 고객이 어떤 주문을 했는지 조회할 수 있다.")
     void getOrdersTest() {
         // given
-        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "130000", "L");
+        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(productOneId, "130000", "L");
         Map<String, Object> orderOne = OrderFixtures.요청_주문_맵_생성(orderLineOne);
 
-        Map<String, String> orderLineTwo = OrderFixtures.요청_주문품목_맵_생성(itemTwoId, "100000", "S");
+        Map<String, String> orderLineTwo = OrderFixtures.요청_주문품목_맵_생성(productTwoId, "100000", "S");
         Map<String, Object> orderTwo = OrderFixtures.요청_주문_맵_생성(orderLineTwo);
 
         OrderFixtures.주문하기(customerId, orderOne);
@@ -80,7 +80,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
         // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
 
-        List<ProductResponse> items = (List<ProductResponse>) response.body().as(CommonResponse.class).getReturnData();
+        List<OrderResponse> items = (List<OrderResponse>) response.body().as(CommonResponse.class).getReturnData();
         assertThat(items.size()).isEqualTo(2);
 
     }
@@ -89,7 +89,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     @DisplayName("Scenario: 고객은 주문을 취소할 수 있다.")
     void cancelOrderTest() {
         // given
-        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "130000", "L");
+        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(productOneId, "130000", "L");
         Map<String, Object> orderOne = OrderFixtures.요청_주문_맵_생성(orderLineOne);
 
         Long orderId = Long.parseLong(String.valueOf(OrderFixtures.주문하기(customerId, orderOne).as(CommonResponse.class).getReturnData()));
@@ -108,7 +108,7 @@ public class OrderAcceptanceTest extends AcceptanceTest {
     @DisplayName("Scenario: 고객은 NEW 상태인 주문만 취소할 수 있다.")
     void cancelOrderTest_notWithNewOrder() {
         // given
-        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(itemOneId, "130000", "L");
+        Map<String, String> orderLineOne = OrderFixtures.요청_주문품목_맵_생성(productOneId, "130000", "L");
         Map<String, Object> orderOne = OrderFixtures.요청_주문_맵_생성(orderLineOne);
 
         Long orderId = Long.parseLong(String.valueOf(OrderFixtures.주문하기(customerId, orderOne).as(CommonResponse.class).getReturnData()));

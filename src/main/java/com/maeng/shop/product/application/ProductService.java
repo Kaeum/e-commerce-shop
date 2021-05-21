@@ -6,11 +6,13 @@ import com.maeng.shop.product.dto.ProductResponse;
 import com.maeng.shop.product.dto.RegisterProductRequest;
 import com.maeng.shop.supplier.domain.Supplier;
 import com.maeng.shop.supplier.domain.SupplierRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 @Transactional(readOnly = true)
 public class ProductService {
     private final SupplierRepository supplierRepository;

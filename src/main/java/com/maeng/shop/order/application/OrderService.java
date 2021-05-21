@@ -56,7 +56,7 @@ public class OrderService {
                 .collect(Collectors.toList());
 
         List<Long> itemIds = placeOrderRequest.getOrderLines().stream()
-            .map(OrderLineRequest::getItemId)
+            .map(OrderLineRequest::getProductId)
             .collect(Collectors.toList());
 
         List<Product> products = productRepository.findByIdIn(itemIds);

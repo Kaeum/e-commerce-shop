@@ -26,12 +26,12 @@ public class OrderFixtures {
         return order;
     }
 
-    public static Map<String, String> 요청_주문품목_맵_생성(Long itemId, String orderPrice, String size) {
-        Map<String, String> item = new HashMap<>();
-        item.put("itemId", itemId + "");
-        item.put("size", size);
-        item.put("orderPrice", orderPrice);
-        return item;
+    public static Map<String, String> 요청_주문품목_맵_생성(Long productId, String orderPrice, String size) {
+        Map<String, String> product = new HashMap<>();
+        product.put("productId", productId + "");
+        product.put("size", size);
+        product.put("orderPrice", orderPrice);
+        return product;
     }
 
     public static ExtractableResponse<Response> 주문하기(Long customerId, Map<String, Object> order) {

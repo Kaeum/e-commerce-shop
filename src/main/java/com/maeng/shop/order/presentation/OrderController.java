@@ -6,11 +6,13 @@ import com.maeng.shop.order.dto.OrderResponse;
 import com.maeng.shop.order.dto.PlaceOrderRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
 
+@Controller
 public class OrderController {
     private final OrderService orderService;
 

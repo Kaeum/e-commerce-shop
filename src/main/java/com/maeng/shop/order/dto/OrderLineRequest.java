@@ -2,14 +2,14 @@ package com.maeng.shop.order.dto;
 
 public class OrderLineRequest {
 
-    private Long itemId;
+    private Long productId;
 
     private int orderPrice;
 
     private String size;
 
-    public Long getItemId() {
-        return itemId;
+    public Long getProductId() {
+        return productId;
     }
 
     public String getSize() {
