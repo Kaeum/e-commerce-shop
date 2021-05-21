@@ -43,7 +43,7 @@ public class OrderService {
     @Transactional
     public Long placeOrder(Long customerId, PlaceOrderRequest placeOrderRequest) {
         Customer customer = customerService.getCustomer(customerId);
-        Order order = Order.createOrder(customer);
+        Order order = Order.placedBy(customer);
 
         orderRepository.save(order);
 

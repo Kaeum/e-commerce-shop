@@ -22,7 +22,7 @@ public class Order extends BaseEntity {
 
     protected Order() {}
 
-    public static Order createOrder(Customer customer) {
+    public static Order placedBy(Customer customer) {
         return new Order(customer, OrderState.NEW);
     }
 
