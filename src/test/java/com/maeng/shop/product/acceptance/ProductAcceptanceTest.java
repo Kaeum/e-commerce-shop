@@ -36,22 +36,13 @@ public class ProductAcceptanceTest extends AcceptanceTest {
     @DisplayName("Scenario: 새로운 아이템을 등록한다.")
     @Test
     void registerProduct() {
-        Map<String, String> product = new HashMap<>();
-        product.put("name", "Adidas Pants");
-        product.put("unitPrice", 90000 + "");
-        product.put("sex", Sex.UNISEX + "");
-        product.put("category", Category.ACCESSORIES + "");
+        // given
+        Map<String, String> product = ProductFixtures.요청_상품_맵_생성("Adidas Pants", 90000, Sex.UNISEX, Category.CLOTHES);
 
-        ExtractableResponse<Response> response = RestAssured.given().log().all()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(product)
-                .when()
-                .post("/api/v1/suppliers/" + supplierId + "/products")
-                .then()
-                .log()
-                .all()
-                .extract();
+        // when
+        ExtractableResponse<Response> response = ProductFixtures.상품_등록_요청(product, supplierId);
 
+        // then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
     }
 
@@ -59,32 +50,15 @@ public class ProductAcceptanceTest extends AcceptanceTest {
     @Test
     void getProductsBySupplierId() {
         // given
-        Map<String, String> product = new HashMap<>();
-        product.put("name", "Adidas Pants");
-        product.put("unitPrice", 90000 + "");
-        product.put("sex", Sex.UNISEX + "");
-        product.put("category", Category.ACCESSORIES + "");
+        Map<String, String> product = ProductFixtures.요청_상품_맵_생성("Adidas Pants", 90000, Sex.UNISEX, Category.CLOTHES);
+        ProductFixtures.상품_등록_요청(product, supplierId);
 
-        RestAssured.given().log().all()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(product)
-                .when()
-                .post("/api/v1/suppliers/" + supplierId + "/products")
-                .then()
-                .log()
-                .all()
-                .extract();
         // when
-        ExtractableResponse<Response> response = RestAssured.given().log().all()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when()
-                .get("/api/v1/suppliers/" + supplierId + "/products")
-                .then()
-                .log()
-                .all()
-                .extract();
+        ExtractableResponse<Response> response = ProductFixtures.상품_목록_조회(supplierId);
         // then
         List<ProductResponse> items = (List<ProductResponse>) response.body().as(CommonResponse.class).getReturnData();
         assertThat(items.size()).isEqualTo(1);
     }
+
+
 }
